@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    
+   
+    <script type="text/javascript">
+        function Solve(args) {
+          
+           
+         var combos=0;
+         
+        var length=parseInt(args[0]);
+
+        for (var i = 1; i <= length-1; i++) {
+            if (parseInt(args[i])>parseInt(args[i+1]) )
+                {
+                    combos++;
+                    
+                }
+
+        }
+        combos++;
+            return combos;
+                
+        }
+   
+        function InputData() {
+            var args = [9,1,8,8,7,6,5,7,7,6];
+            //args.push(70110209207109375);
+           
+            console.log(Solve(args));
+
+        }
+    </script>
+</head>
+<body onload="InputData()">
+
+</body>
+</html>

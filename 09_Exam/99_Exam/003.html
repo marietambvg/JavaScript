@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    
+   
+    <script type="text/javascript">
+        function Solve(args) {
+	           var result;
+	           var operation;
+	           var firstData=true;
+	           var length=args.length;
+	           var inputLine;
+	           var workingLine;
+	           var functionValue={};
+	           var l,i,j,currentElement,a, start;
+	           for (i = 0; i < length; i++) {
+	           		result=0;
+
+	           		//read line
+	           		inputLine=args[i].split(" ");
+	           		function createArray(inputLine){
+	           	
+		           		workingLine=[];
+		           		
+			           	for ( j = 0; j < inputLine.length; j++) {
+			           		currentElement=inputLine[j].trim();
+			           		if ((currentElement!==null)&&(currentElement!==" ")&&(currentElement!=="")){
+			           			if(currentElement.contains("(")&&(currentElement.length>1)){
+				           			if (currentElement.contains("def")){
+				           				workingLine.push("(");
+				           				workingLine.push("def");
+
+				           			}
+				           		
+				           			else {
+				           				for (l = 0; l < currentElement.length; l++) {
+				           				workingLine.push(currentElement[l].trim());
+					           			}
+					           		}
+					           	}
+			   		           	
+			   		           	else if(currentElement.contains(")")&&(currentElement.length>1)){
+
+			   		           		if(currentElement.substring(0,currentElement.length-1).trim()!==""){
+			   		           		workingLine.push(currentElement.substring(0,currentElement.length-1).trim());
+				   		           	
+			   		           		workingLine.push(currentElement[currentElement.length-1].trim());
+				   		           	}
+			   		           	}
+
+			   		           	else { 
+			   		           		workingLine.push(currentElement);
+			   		           	}
+				           }
+				       }
+				       return workingLine;	
+			       }
+			       workingLine=createArray(inputLine)
+
+			       function CalculateInsideBrackets(workingLine){
+				       switch(workingLine[1])
+				       {
+			           		//case +
+			       			case "+":{
+			       			
+			       				var a = 3;
+			       				if(isNaN(parseInt(workingLine[2]))){
+			       					
+	       						result=functionValue[workingLine[2]]; 
+	       						
+
+		       					} else {
+		       						result=parseInt(workingLine[2]);
+		       						
+		       					}
+			       				
+			           				while(workingLine[a]!==")") {
+			           					
+			           					var update;
+			           					if(parseInt(workingLine[a])==="NaN"){
+			           						update=functionValue[workingLine[a]];
+			           						
+			           					} else {
+			           						update=parseInt(workingLine[a]);
+			           						
+			           					}
+			           					result+=update;
+			           					
+			           					a++;
+			           				};
+			           				break;
+			       			}
+			       			//case -
+			       			case "-":{
+			       			
+			       				var a = 3;
+			       				result=parseInt(workingLine[2]); 
+			       				
+			           				while(workingLine[a]!==")") {
+			           					result-=parseInt(workingLine[a]);
+			           					a++;
+			           				};
+			           				break;
+			       			}
+			       			//case *
+			       			case "*":{
+			       			
+			       				var a = 3;
+			       				result=parseInt(workingLine[2]); 
+			       				
+			           				while(workingLine[a]!==")") {
+			           					result*=parseInt(workingLine[a]);
+			           					a++;
+			           				};
+			           				break
+			       			}
+			       			//case /
+			       			case "/":{
+			       			
+			       				var a = 3;
+			       				result=parseInt(workingLine[2]); 
+			       				
+			       				while(workingLine[a]!==")") {
+			       					if(parseInt(workingLine[a])===0){
+			       						result="Division by zero! At Line:"+i;
+			       						return result;
+			       					}
+			       					else{
+			       						result/=parseInt(workingLine[a]);
+			       					a++;
+			           				}
+			       				};
+			       				break
+			       			}
+			       			//case def
+			       			case "def":{
+			       				var currentName=workingLine[2];
+
+			       				if (!isNaN(parseInt(workingLine[3]))) {
+				       			update=parseInt(workingLine[3]);
+				       			functionValue[currentName]=update;
+					       		} //else if {}
+				       			
+			       				
+			       				
+			       				//result=functionValue[];
+			       			};
+			       			break;
+
+			   			}
+			   			return result;
+			   		}
+			   		result=CalculateInsideBrackets(workingLine);
+		   		}
+		        
+	       return result;
+		}
+	
+        
+        function InputData() {
+            var args = ["(def myFunc 5)","(+ myFunc 45)"];
+            console.log(Solve(args));
+
+        }
+    </script>
+</head>
+<body onload="InputData()">
+
+</body>
+</html>

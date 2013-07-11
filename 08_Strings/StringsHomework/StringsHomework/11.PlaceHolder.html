@@ -1,0 +1,52 @@
+﻿<!-- Write a function that formats a string using placeholders:
+The function should work with up to 30 placeholders and all types
+var str = stringFormat("Hello {0}!","Peter");
+str = "Hello Peter!";
+var format = "{0}, {1}, {0} text {2}";
+var str = stringFormat(format,1,"Pesho","Gosho");
+str = "1, Pesho, 1 text Gosho"
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Placeholders</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div id="js-console">
+    </div>
+    <script src="scripts/js-console.js">	  
+    </script>
+    <script>
+        //Enter some input text
+
+       
+        
+function stringFormat(str)
+{
+           
+           var output=arguments[0];
+           var length=arguments.length-1;
+           for (var i = 0; i < length; i++) {
+              var toBeReplaced="{"+i+"}";
+              while (output.indexOf(toBeReplaced)!=-1)
+              {
+              output=output.replace(toBeReplaced,arguments[i+1]);
+              }
+           }
+           return output;
+       }
+
+        var str = stringFormat("Hello {0}!","Peter");
+        jsConsole.writeLine(str);
+        var format = "{0}, {1}, {0} text {2}";
+        var str = stringFormat(format,1,"Pesho","Gosho");
+        jsConsole.writeLine(str);
+        
+
+
+    </script>
+</body>
+</html>

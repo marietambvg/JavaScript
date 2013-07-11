@@ -1,0 +1,32 @@
+﻿<!-- Write an expression that checks if given print (x,  y) is within a circle K(O, 5).
+.  -->
+<html>
+<head>
+	<title>Within Circle</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<input type="text" id="inputX" />
+	<input type="text" id="inputY" />
+	
+	<div id="js-console"></div>
+	<script src="scripts/js-console.js"></script>
+	<script>
+		var x = parseFloat(document.getElementById("inputX").value);
+		var y = parseFloat(document.getElementById("inputY").value);
+		
+		//!!!!!input data work only with Firefox!!!!!
+		jsConsole.writeLine("Enter the x and y coordinate of the point the above text box and press F5");
+		jsConsole.writeLine("=========================================================================");
+		
+		
+         if (isNaN(x)||isNaN(y)) jsConsole.write("Enter valid data!")
+		else if (((x * x + y * y) < 25)) jsConsole.write("The point is within circle K(0,5)")
+			else if (((x * x + y * y) == 25)) jsConsole.write("The point is on the border of the circle K(0,5)")
+			else jsConsole.write("The point is not within circle K(0,5)")
+			
+								 
+	</script>
+</body>
+
+</html>

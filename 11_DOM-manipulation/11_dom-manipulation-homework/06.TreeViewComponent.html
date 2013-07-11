@@ -1,0 +1,93 @@
+﻿<!-- //Create a TreeView component -->
+<!-- Initially only the top items must be visible
+On item click
+If its children are hidden (collapsed), they must be made visible (expanded)
+If its children are visible (expanded), they must be made hidden (collapsed)
+Research about events -->
+
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>DOM Manipulation -  my tests</title>
+	<style type="text/css">
+	
+	</style>
+	<script type="text/javascript">
+		var maxWidth = screen.width - 100;
+		var maxHeight = screen.height - 300;
+
+		function clearOldDivs () {
+			var divs=document.getElementById("content");
+			while(divs.firstChild) divs.removeChild(divs.firstChild)
+		}
+			
+		function getRandomNumber(min, max) {
+	  		return Math.random() * (max - min) + min;
+		}
+
+		function generateRandomColor() {
+				var red = (Math.random() * 256) | 0;
+				var green = (Math.random() * 256) | 0;
+				var blue = (Math.random() * 256) | 0;
+
+				return "rgb(" + red + "," + green + "," + blue + ")";
+		}
+
+		function createRandomDiv(divList){
+			//width and height (20-100px)
+			
+			var width=parseInt(getRandomNumber(20,100));
+			divList.style.width=width+"px";
+			var height=parseInt(getRandomNumber(20,100));
+			divList.style.height=height+"px";
+			divList.style.backgroundColor = generateRandomColor();
+			divList.style.color=generateRandomColor();
+			divList.style.position="absolute";
+			var topPos = parseInt(Math.random() * (maxHeight - 40));
+			divList.style.top = topPos + "px";
+			var left = parseInt(Math.random() * (maxWidth - 40));
+			divList.style.left = left + "px";
+			divList.style.borderStyle="solid";
+			divList.style.borderColor=generateRandomColor();
+			var radius=parseInt(getRandomNumber(0,30));
+			divList.style.borderRadius=radius+"px";
+			var border=parseInt(getRandomNumber(1,20));
+			divList.style.borderWidth=border+"px";
+			var innerDiv=document.createElement("strong");
+			innerDiv.innerHTML="DIV";
+			divList.appendChild(innerDiv);
+			divList.style.textAlign="center";
+			divList.style.paddingTop=parseInt(height/2)+"px";
+
+			return divList;
+		}
+
+		function onGenerateDivsButtonClick(){
+			
+			clearOldDivs();
+			
+			var count=document.getElementById("tb-div-count").value|0;
+			//console.log(count);
+				var dFrag=document.createDocumentFragment();
+				for (var i = 0; i < count; i++) {
+					var divList = document.createElement("div");
+					createRandomDiv(divList);
+					dFrag.appendChild(divList);
+				}
+			var divs=document.getElementById("content");
+			divs.appendChild(dFrag);
+		}
+	
+
+	</script>
+</head>
+<body>
+<label for="tb-div-count">Enter number of divs to be created</label>
+<input type="text" id="tb-div-count" />
+<button onclick="onGenerateDivsButtonClick()">Create divs</button>
+<div id="content">
+	</div>	
+</body>
+</html>

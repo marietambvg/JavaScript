@@ -1,0 +1,61 @@
+﻿<!-- Write a program that finds the most frequent number in an array.   -->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Most frequent number</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	
+	<div id="js-console">
+	</div>
+	<script src="scripts/js-console.js">	  
+	</script>
+	<script>
+		//Enter some input text
+
+			function orderBy(a, b) {
+			 
+			return a - b;
+		};
+			var arr = [4,1,1,4,2,3,4,4,1,2,4,9,3];
+			jsConsole.write("The starting array: ")
+			var len = arr.length;
+			arr.forEach(function(item){jsConsole.write(item+" ")});
+			jsConsole.writeLine();
+            arr.sort(orderBy);
+            jsConsole.write("The sorted array: ")
+            arr.forEach(function(item){jsConsole.write(item+" ")});
+            var start = 0;
+            var maxStart = 0;
+            var maxSequence = 0;
+            var sequence = 0;
+            for (var i = 0; i < len - 1; i++)
+            {
+                if (arr[i] == arr[i + 1])
+                {
+                    sequence++;
+                    if (sequence > maxSequence)
+                    {
+                        maxSequence = sequence;
+                        maxStart = start;
+                    }
+
+                }
+                else
+                {
+                    sequence = 0;
+                    start = i + 1;
+                }
+
+            }
+            jsConsole.writeLine();
+            jsConsole.write("The most frequent number in the array is "+arr[maxStart]);
+            jsConsole.writeLine(" ==> "+ (maxSequence+1)+" times.");
+
+			
+		
+	</script>
+</body>
+</html>

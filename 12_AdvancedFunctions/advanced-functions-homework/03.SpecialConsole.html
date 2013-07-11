@@ -1,0 +1,88 @@
+<!--Create a module to work with the console object.Implement functionality for:
+Writing a line to the console 
+Writing a line to the console using a format
+Writing to the console should call toString() to each element
+Writing errors and warnings to the console with and without format -->
+<html>
+<head>
+	<title>Special Console</title>
+	</head>
+<body>
+	
+	<script>
+	var specialConsole=(function(){
+		
+		function toString(args){
+           var output = args[0];
+           var length = args.length-1;
+           for (var i = 0; i < length; i++) {
+              	var toBeReplaced="{"+i+"}";
+              	while (output.indexOf(toBeReplaced)!=-1){
+              	output = output.replace(toBeReplaced,args[i+1]);
+              	}
+           }
+           console.log (output);
+       	}
+
+		//functionality - write line
+		function writeLine() {
+			var args = Array.prototype.slice.call(arguments);
+            if (args.length > 0) {
+            	toString(args);
+			}
+       }
+	   //functionality - write wornings
+       function writeError(args) {
+			var args = Array.prototype.slice.call(arguments);
+            if (args.length > 0) {
+            	toString(args);
+			}
+	   }
+
+	   //functionality - write errors
+	   function writeWarning(args){
+	   		var args = Array.prototype.slice.call(arguments);
+            if (args.length > 0) {
+            	toString(args);
+			}
+	   	};
+	   	
+		
+		return {
+			writeLine:writeLine,
+			writeWarning:writeWarning,
+			writeError:writeError
+		};
+
+	}());
+	
+	console.log("Test WriteLine functionality without format");
+	specialConsole.writeLine("Message: hello");
+	console.log("--------------------------------------------");
+
+	console.log("Test WriteLine functionality with format");
+	specialConsole.writeLine("Message: {0}", "hello");
+	console.log("--------------------------------------------");
+
+	console.log("Test WriteWarning functionality without format");
+	specialConsole.writeWarning("Warning: A warning! Invaid command!");
+	console.log("--------------------------------------------");
+
+	console.log("Test WriteWarning functionality with format");
+	specialConsole.writeWarning("Warning: {0} {1}", "A warning!","Invaid command!");
+	console.log("--------------------------------------------");
+	
+	console.log("Test WriteError functionality without format");
+	specialConsole.writeError("Error: Something happened! Something very bad!");
+	console.log("--------------------------------------------");
+
+	console.log("Test WriteError functionality with format");
+	specialConsole.writeError("Error: {0}{2}{1}", "Something happened!","very bad!", " Something ");
+	console.log("--------------------------------------------");
+	
+
+	
+</script>
+</body>
+
+</html>

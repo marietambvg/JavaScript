@@ -1,0 +1,181 @@
+﻿<!--Create a module that works with moving div elements. Implement functionality for:
+Add new moving div element to the DOM
+The module should generate random background, font and border colors
+All the div elements are with the same width and height
+The movements of the div elements can be either circular or rectangular
+The elements should be moving all the time -->
+<html>
+<head>
+	<title>Moving Shapes</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	
+	
+	<button id="clickButton" onclick="onCreateRectDivButtonClick()">Create Div moving rectagular</button>
+	<button id="clickButton" onclick="onCreateCircularDivButtonClick()" >Create Div moving circular</button>
+	
+	
+<script>
+var startTop=100;
+var startLeft=100;
+var endTop=500;
+var endLeft=950;
+var middleTop=(endTop-startTop)/2+startTop;
+var middleLeft=(endLeft-startLeft)/2+startLeft;
+var angle = 1000;
+//var radius = 10;
+
+
+var movingShapes = (function(){
+
+	
+	function moveDivsInCircuit(){
+		var divsToMoveCircular = document.getElementsByClassName("circuit");
+		var len=divsToMoveCircular.length;
+		for(var i = 0; i < len; i++) {
+			var radius=parseInt(divsToMoveCircular[i].getAttribute("radius"))/2;
+			var left=getNumberValueOfStyleProperty(divsToMoveCircular[i], "left")
+			var top=getNumberValueOfStyleProperty(divsToMoveCircular[i], "top")
+			divsToMoveCircular[i].style.left =Math.round(left + Math.sin(angle - 2 * Math.PI / divsToMoveCircular.length * i)/radius*100)+ 'px';
+			divsToMoveCircular[i].style.top = Math.round(top + Math.cos(angle - 2 * Math.PI / divsToMoveCircular.length* i)/radius*100) + 'px';
+			
+		}
+		angle = angle + 0.01;
+		setTimeout(moveDivsInCircuit,10);
+	}
+	// See file MovingDivsRect.docx for details of what this function does
+	function moveDivsInRectangle(){
+		var divsToMoveRectangular = document.getElementsByClassName("rect");
+		var len = divsToMoveRectangular.length;
+		for(var i = 0; i < len; i++) {
+			var left = getNumberValueOfStyleProperty(divsToMoveRectangular[i],"left")
+			var startL = parseInt(divsToMoveRectangular[i].getAttribute("startLeftPosition"));
+			var top = getNumberValueOfStyleProperty(divsToMoveRectangular[i], "top");
+			var startT = parseInt(divsToMoveRectangular[i].getAttribute("startTopPosition"));
+			var endL = endLeft -(startL - startLeft);
+			var endT = endTop - (startT - startTop);
+			if ((left==startL)&&(top==startT)){
+				divsToMoveRectangular[i].setAttribute("dir","moveLeft");
+			}
+			else if ((left==endL)&&(top==startT)){
+				divsToMoveRectangular[i].setAttribute("dir","moveDown");
+			} 
+			else if ((left==endL)&&(top==endT)){
+				divsToMoveRectangular[i].setAttribute("dir","moveRight");
+			} 
+			else if ((left==startL)&&(top==endT)){
+				divsToMoveRectangular[i].setAttribute("dir","moveUp");
+			} 
+			var direction = divsToMoveRectangular[i].getAttribute("dir");
+			//console.log("direction = "+direction)
+			switch(direction){
+				case "moveLeft": left++; break;
+				case "moveRight": left--; break;
+				case "moveDown": top++;	break;
+				case "moveUp":	top--; break;
+			}
+			divsToMoveRectangular[i].style.left = left + 'px';
+			divsToMoveRectangular[i].style.top = top  + 'px';
+			
+		}
+		
+			setTimeout(moveDivsInRectangle,100);
+	}
+
+	function getNumberValueOfStyleProperty(element,property){
+		var stringValue=element.style[property];
+		var length=stringValue.length;
+		var valueWithoutPX=stringValue.substr(0,length-2);
+		var numberValue=parseInt(valueWithoutPX);
+		return numberValue;
+	}
+
+	function getRandomIntValue(min,max){
+		var random=Math.floor(Math.random() * (max - min + 1)) + min;
+		return random;
+	}
+
+	function generateRandomColor() {
+					var red = (Math.random() * 256) | 0;
+					var green = (Math.random() * 256) | 0;
+					var blue = (Math.random() * 256) | 0;
+
+					return "rgb(" + red + "," + green + "," + blue + ")";
+	}
+
+	function createDiv(movement){
+		var div=document.createElement(div);
+		div.style.width = "50px";
+		div.style.height = "50px";
+		div.style.position="absolute";
+		var topPos= getRandomIntValue(startTop,endTop)
+		div.style.top = topPos+"px";
+		if (topPos>(middleTop)) topPos=startTop+(endTop-topPos);
+		div.setAttribute('startTopPosition', topPos);
+		var leftPos = getRandomIntValue(startLeft,endLeft);
+		//console.log("leftPos = "+leftPos);
+		div.style.left = leftPos+"px";
+		if (leftPos>(middleLeft)) leftPos=startLeft+(endLeft-leftPos);
+		div.setAttribute('startLeftPosition', leftPos);
+		var attribute=div.getAttribute("startLeftPosition")
+		//console.log("attribute leftPos ="+attribute);
+		if (leftPos<(endTop-startTop)/2){
+			var direction="moveLeft";
+		}
+		else {
+			var direction="moveRight";
+		}
+
+		div.setAttribute("dir",direction);
+		var possibleRadiusTop=(endTop-topPos)/2
+		var possibleRadiusLeft=(endLeft-leftPos)/2
+		if (possibleRadiusLeft < possibleRadiusTop){
+			var radius=possibleRadiusLeft}
+			else {
+				var radius=possibleRadiusTop;
+			}
+		div.setAttribute("radius", radius);
+		div.style.background = generateRandomColor();
+		div.style.borderStyle="solid";
+		div.style.borderColor = generateRandomColor();
+		//div.setAttribute("movement", movement);
+		document.body.appendChild(div);
+		div.style.color=generateRandomColor();
+		var innerStrong=document.createElement("strong");
+		innerStrong.innerHTML="Text";
+		innerStrong.style.position="relative";
+		innerStrong.style.top="12px";
+		//innerStrong.style.fontSize="14px";
+		div.appendChild(innerStrong);
+		div.style.textAlign="center";
+		div.className=movement;
+		if (movement=="circuit"){
+			div.style.borderRadius="25px";
+		}
+		document.body.appendChild(div);
+		moveDivsInCircuit();
+		moveDivsInRectangle();
+	};
+
+	return { 
+			add:createDiv
+	};
+}());
+
+
+
+function onCreateRectDivButtonClick(){
+		movingShapes.add("rect")			
+}
+
+function onCreateCircularDivButtonClick(){
+		movingShapes.add("circuit");
+}
+	
+
+
+</script>
+</body>
+
+</html>

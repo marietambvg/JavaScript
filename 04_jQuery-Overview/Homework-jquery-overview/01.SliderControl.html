@@ -1,0 +1,97 @@
+	
+
+    <!DOCTYPE html>
+     
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head runat="server">
+        <title></title>
+        
+
+        <script src="scripts/jquery-1.9.1.min.js"></script>
+        <!-- // <script src="scripts/jQuery.js"></script> -->
+        <style>
+            .sliderItem {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <div class="sliderItem">
+            <img src="images/picture0large.jpg" />
+        </div>
+         <div class="sliderItem">
+             <img src="images/picture1large.jpg" />
+        </div>
+         <div class="sliderItem">
+            <img src="images/picture2large.jpg" />
+        </div>
+         <div class="sliderItem">
+             <img src="images/picture3large.jpg" />
+        </div>
+         <div class="sliderItem">
+           <img src="images/picture0large.jpg" />
+        </div>
+         <div class="sliderItem">
+            <img src="images/picture1large.jpg" />
+        </div>
+         <div class="sliderItem">
+            <img src="images/picture2large.jpg" />
+        </div>
+         <div class="sliderItem">
+             <img src="images/picture3large.jpg" />
+        </div>
+         <div class="sliderItem">
+             <img src="images/picture0large.jpg" />
+        </div>
+         <div class="sliderItem">
+             <img src="images/picture1large.jpg" />
+        </div>
+     
+        <button id="prev">    
+            <
+        </button>
+         <button id="next">    
+             >  
+        </button>
+    </body>
+    <script>  
+        var index = 0;
+     
+        var sliderItems = $(".sliderItem");
+     
+        function next() {
+            index++;
+            if (index >= sliderItems.length) {
+                index = 0;
+            }
+            sliderItems.hide();
+            var nextItem = $(sliderItems[index]);
+            nextItem.show();
+        }
+       
+        function prev() {
+            index--;
+            if (index <= 0 ) {
+                index = sliderItems.length-1;
+            }
+            sliderItems.hide();
+            var nextItem = $(sliderItems[index]);
+            nextItem.show();
+        }
+       
+        $("#next").click(function() {
+            next();
+        })
+     
+        $("#prev").click(function () {
+            prev();
+        })
+     
+        next();
+        setInterval(function () {
+            next();
+        }, 2000);
+    </script>
+    </html>
+

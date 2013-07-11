@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <script src="scripts/jquery-1.10.1.js"></script>
+		<script src="scripts/tree-view.js"></script>
+		<style>
+		ul {
+			list-style-image:url('images/Bullet.png');
+		}
+		li{
+			color:blue;
+			font-weight: bold;
+		}
+		</style>
+    </head>
+    <body>
+        <div id="wrap">
+			<ul id="list-wrap">
+				<li>
+					Item with subitems
+					<ul>
+						<li>
+							Subitem with subitems
+							<ul>
+								<li>SubItem</li>
+								<li>SubItem</li>
+								<li>SubItem</li>
+							</ul>
+						</li>
+						<li>Subitem</li>
+						<li>
+							Subitem with subItems
+							<ul>
+								<li>SubItem</li>
+								<li>SubItem</li>
+								<li>SubItem</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>Item</li>
+				<li>
+					Item with subitems
+					<ul>
+						<li>
+							Subitem with subitems
+							<ul>
+								<li>
+									Subitem with subitems
+									<ul>
+								<li>SubItem</li>
+								<li>SubItem</li>
+								<li>SubItem</li>
+								<li>SubItem</li>
+								<li>SubItem</li>
+								<li>SubItem</li>
+									</ul>
+								</li>
+								<li>SubItem</li>
+								<li>
+									Subitem with subitems
+									<ul>
+										<li>Subitem</li>
+										<li>Subitem</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li>Subitem</li>
+						<li>Subitem</li>
+						<li>Subitem</li>
+					</ul>
+				</li>
+				<li>Item</li>
+			</ul>
+		</div>
+		
+		<script>
+		
+		$("#list-wrap").treeView();
+		
+		</script>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+﻿<!--Write a script that finds the biggest of three integers using nested if statements.
+
+ -->
+ <!-- !!!!!input data works only with Firefox!!!!! -->
+<html>
+<head>
+	<title>Find the biggest of three numbers</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<input type="text" id="inputA" value="enter value A" />
+	<input type="text" id="inputB" value="enter value B" />
+	<input type="text" id="inputC" value="enter value C" />
+	
+	<div id="js-console"></div>
+	<script src="scripts/js-console.js"></script>
+	<script>
+		var a = parseInt(document.getElementById("inputA").value);
+		var b = parseInt(document.getElementById("inputB").value);
+		var c = parseInt(document.getElementById("inputC").value);
+		
+		//!!!!!input data works only with Firefox!!!!!
+		jsConsole.writeLine("Enter the numbers you want to check in the above text box and press F5");
+		jsConsole.writeLine("=====================================================================");
+		if (isNaN(a)||isNaN(b)||isNaN(c)) jsConsole.write("Enter valid data!");
+		else 
+		{
+          var max = a;
+
+        if (b > max)
+        {
+            max = b;
+        }
+        if (c > max)
+        {
+            max = c;
+        }
+
+        jsConsole.writeLine("The max of entered numbers is "+ max+"!");
+    }
+
+
+										 
+	</script>
+</body>
+
+</html>

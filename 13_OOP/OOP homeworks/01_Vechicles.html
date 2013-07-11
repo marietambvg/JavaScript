@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Vechicles</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	
+<script>
+var vechiclesNS = (function() {﻿﻿﻿
+    Function.prototype.inherit = function(parent) {
+        this.prototype = new parent();
+        this.prototype.constructor = parent;
+    };
+
+    Function.prototype.extend = function(parent) {
+	    for (var i = 1; i < arguments.length; i += 1) {
+	        var name = arguments[i];
+	        this.prototype[name] = parent.prototype[name];
+	    }
+	    return this;
+	}
+
+    
+    function CreatePropulsionUnit(type, arg1, arg2){
+    	if (type=="wheel") return new Wheel(arg1);
+    	else if (type=="propellingNozzle") return new PropellingNozzle(arg1, arg2);
+    	else if (type=="propeller") return new Propeller(arg1,arg2);
+    	
+	}
+
+	function PropulsionUnit(){
+		var produceAcceleration = function(){};
+		return {
+            produceAcceleration: produceAcceleration
+        };
+	}
+
+	function Wheel (radius){
+		var self = this;
+		PropulsionUnit.apply(this, arguments);
+		var _radius = radius;
+		self.getRadius = function getWheelRadius(){
+			return _radius;
+		}
+		this.produceAcceleration = function accelerationByWheel() {
+		return this.getRadius()*2*Math.PI; 
+		}
+	}
+
+	Wheel.inherit(PropulsionUnit);
+	
+	function PropellingNozzle (power, afterBurnSwitch){
+		var self = this;
+		PropulsionUnit.apply(this, arguments);
+		var _power = power;
+		self.getPower = function getPropellingNozzlePower(){
+			return _power;
+		}
+		self.afterBurnSwitch = afterBurnSwitch;
+		
+		this.produceAcceleration = function accelerationByPropellingNozzle() {
+	 		if (this.afterBurnSwitch==="on"){
+	 			console.log("switch is on and acceleration is "+ this.getPower()*2);
+	 			return (this.getPower())*2;
+	 		}  
+	 		else {
+	 			 console.log("switch is off and acceleration is "+ this.getPower())
+	 		 	 return this.getPower();
+	 		}
+		}
+	}
+
+	PropellingNozzle.inherit(PropulsionUnit);
+
+	function Propeller (numberOfFin, spinDirection){
+		var self = this;
+		PropulsionUnit.apply(this, arguments);
+		var _numberOfFin = numberOfFin;
+		self.getNumberOfFin = function getNumberOfFinOfPropeller(){
+			return _numberOfFin;
+		}
+		self.spinDirection = spinDirection;
+		this.produceAcceleration = function accelerationByPropeller() {
+	 		if (this.spinDirection==="clockwise"){
+	 			console.log("Spin direction of current propeller is 'clockwise' and it's acceleration  is "+ this.getNumberOfFin());
+	 			return (this.getNumberOfFin());
+	 		}  
+	 		else{
+	 			console.log("Spin direction of current proppeler is 'counter-clockwise' and it's acceleration  is "+ this.getNumberOfFin()*(-1));
+	 			return (this.getNumberOfFin()*(-1));
+	 		}
+		}
+	}
+
+	Propeller.inherit(PropulsionUnit);
+
+	function CreateVechicle(type, speed, propulsionUnit, numberOfPropellers, state){
+		if (type=="Land") return new LandVechicle(speed,propulsionUnit);
+		else if(type=="Air") return new AirVechicle(speed, propulsionUnit);
+		else if (type=="Water") return new WaterVechicle(speed,propulsionUnit, numberOfPropellers);
+		else return new AmphibiousVechicle(speed, propulsionUnit, numberOfPropellers, state)
+		//TODO add other types
+	}
+	//create Vechicle
+    function Vechicle(speed, propulsionUnit) {
+        var self = this;
+        self.speed = speed;
+        self.propulsionUnit = propulsionUnit;
+   }
+
+   //add Vechicle acceleration method
+   Vechicle.prototype.accelerate=function(){
+	   var length=this.propulsionUnit.length;
+	   var producedAcceleration = 0;
+	   for (var i = 0; i < length; i++) {
+	   		producedAcceleration+=this.propulsionUnit[i].produceAcceleration()
+	   };
+	   this.speed=this.speed+producedAcceleration;
+   }
+
+	function LandVechicle(speed,wheel){
+		var self = this;
+        Vechicle.call(self, speed, wheel);
+        var NUMBER_OF_WHEELS = 4;
+        if (wheel.length<NUMBER_OF_WHEELS){
+        	console.ERROR("Your car does not have 4 wheels!")
+        }
+    }
+
+    LandVechicle.inherit(Vechicle);
+
+   	function AirVechicle(speed,propellingNozzle){
+		var self = this;
+        Vechicle.call(self, speed, propellingNozzle);
+        
+        self.switchAfterBurnSwitch = function switchSwitch(){
+        	var length=propellingNozzle.length;
+        	for (var i = 0; i < length; i++) {
+        		if (propellingNozzle[i].afterBurnSwitch=="on"){
+					propellingNozzle[i].afterBurnSwitch="off";
+				} 
+				else propellingNozzle[i].afterBurnSwitch="on";
+			}
+    	}
+	}	
+    
+    AirVechicle.inherit(Vechicle);
+
+    function WaterVechicle(speed, propeller){
+		var self = this;
+		Vechicle.call(self, speed, propeller);
+        
+        // self.getAcceleration = function getVechicleAcceleration(){
+        // 	return propeller.accelerationByPropeller();
+        // }
+     }
+    
+    WaterVechicle.inherit(Vechicle);
+	WaterVechicle.prototype.switchSpinDirection = function (){
+        	var length=this.propulsionUnit.length;
+        	for (var i = 0; i < length; i++) {
+        		if (this.propulsionUnit[i].spinDirection=="clockwise"){
+				this.propulsionUnit[i].spinDirection="counter-clockwise";
+			} 
+			else this.propulsionUnit[i].spinDirection="clockwise";
+			}
+		}
+
+    function AmphibiousVechicle(speed, propulsionUnit, state){
+		var self = this;
+		self.state=state;
+		self.landPropulsionUnits=propulsionUnit["land"]
+		self.waterPropulsionUnits=propulsionUnit["water"]
+		if (state=="water") self.propulsionUnit=self.waterPropulsionUnits;
+		else self.propulsionUnit=this.landPropulsionUnits;
+		Vechicle.call(self, speed,self.propulsionUnit)
+    }
+    AmphibiousVechicle.inherit(Vechicle);
+    AmphibiousVechicle.extend(WaterVechicle,"switchSpinDirection");
+
+    AmphibiousVechicle.prototype.changeState=function(){
+    	if( (this.state)=="water") {
+    		 this.state="land";
+    		 this.propulsionUnit=this.landPropulsionUnits;
+    	}
+    	else {
+    			this.state="water";
+    			this.propulsionUnit=this.waterPropulsionUnits;
+		}
+    }
+    
+    return {
+    	PropulsionUnit: CreatePropulsionUnit,
+        Vechicle: CreateVechicle
+    };
+}());
+
+//test VechicleNS functionality - SEE RESULTS ON THE CONSOLE
+//test Land Vechicles
+console.log("----------------------------------------------------");
+console.log("----------------------------------------------------");
+console.log("We create our first LandVechicle - with name landCar");
+console.log("----------------------------------------------------");
+var landCarPropulsionUnits=[];
+for (var i = 0; i < 4; i++) {
+	var unitWheel = new vechiclesNS.PropulsionUnit("wheel",50);
+	landCarPropulsionUnits.push(unitWheel);
+}
+var landCar = new vechiclesNS.Vechicle("Land",200,landCarPropulsionUnits);
+console.log("landCar initial speed:");
+console.log(landCar.speed);
+landCar.accelerate();
+console.log("landCar is accelerated!");
+console.log("landCar new speed:");
+console.log(landCar.speed);
+console.log("landCar is accelerated once more!");
+landCar.accelerate();
+console.log("landCar new speed:");
+console.log(landCar.speed);
+console.log("landCar is accelerated and once more!");
+landCar.accelerate();
+console.log("landCar speed after third acceleration:");
+console.log(landCar.speed);
+
+//test Air Vechicles
+console.log("----------------------------------------------------");
+console.log("----------------------------------------------------");
+console.log("We create our first AirVechicle - with name airCar");
+console.log("----------------------------------------------------");
+var airCarPropulsionUnits=[];
+var unitPropellingNozzle = new vechiclesNS.PropulsionUnit("propellingNozzle",50,"on");
+airCarPropulsionUnits.push(unitPropellingNozzle);
+var airCar = new vechiclesNS.Vechicle("Air",200,airCarPropulsionUnits)
+console.log("airCar initial speed:");
+console.log(airCar.speed);
+airCar.accelerate();
+console.log("airCar is accelerated!");
+console.log("airCar new speed:");
+console.log(airCar.speed);
+console.log("airCar is accelerated once more!");
+airCar.accelerate();
+console.log("airCar new speed:");
+console.log(airCar.speed);
+airCar.switchAfterBurnSwitch();
+airCar.accelerate();
+console.log("and of course airCar is accelerated once more time");
+console.log("airCar speed after third acceleration:");
+console.log(airCar.speed);
+
+//test Water Vechicles
+console.log("----------------------------------------------------");
+console.log("----------------------------------------------------");
+console.log("We create our first WaterVechicle - with name waterCar");
+console.log("----------------------------------------------------");
+var waterCarPropulsionUnits=[];
+var waterCarNumberOfPropellers=5;
+for (var i = 0; i < waterCarNumberOfPropellers; i++) {
+	if (i%2==0){
+		var unitPropeller = new vechiclesNS.PropulsionUnit("propeller",100,"clockwise");
+	} else {
+		var unitPropeller = new vechiclesNS.PropulsionUnit("propeller",50,"counter-clockwise");
+		
+	}
+	waterCarPropulsionUnits.push(unitPropeller);
+};
+var waterCar = new vechiclesNS.Vechicle("Water",200,waterCarPropulsionUnits,5)
+console.log("waterCar initial speed:");
+console.log(waterCar.speed);
+waterCar.accelerate();
+console.log("waterCar is accelerated!");
+console.log("waterCar new speed:");
+console.log(waterCar.speed);
+console.log("waterCar is accelerated once more!");
+waterCar.accelerate();
+console.log("waterCar new speed:");
+console.log(waterCar.speed);
+console.log("Now we change the spin direction of propellers!")
+waterCar.switchSpinDirection();
+waterCar.accelerate();
+console.log("and of course waterCar is accelerated once more time");
+console.log("waterCar speed after third acceleration:");
+console.log(waterCar.speed);
+
+//test Abphibious Vechicles
+console.log("----------------------------------------------------");
+console.log("----------------------------------------------------");
+console.log("We create our first AmphibiousVechicle - with name amphibiousCar");
+console.log("----------------------------------------------------");
+var amphibiousCarPropulsionUnits={};
+amphibiousCarPropulsionUnits["land"]=[];
+for (var i = 0; i < landCarPropulsionUnits.length; i++) {
+	amphibiousCarPropulsionUnits["land"].push(landCarPropulsionUnits[i]);
+};
+
+amphibiousCarPropulsionUnits["water"]=[];
+for (var i = 0; i < waterCarPropulsionUnits.length; i++) {
+	amphibiousCarPropulsionUnits["water"].push(waterCarPropulsionUnits[i]);
+};
+
+var amphibiousCar = new vechiclesNS.Vechicle("Amphibious",200,amphibiousCarPropulsionUnits,"land")
+console.log("amphibiousCar initial state:");
+console.log(amphibiousCar.state);
+console.log("amphibiousCar as Land Car initial speed:");
+console.log(amphibiousCar.speed);
+amphibiousCar.accelerate();
+console.log("amphibiousCar as Land Car is accelerated!");
+console.log("amphibiousCar as Land Car new speed:");
+console.log(amphibiousCar.speed);
+console.log("amphibiousCar as Land Car is accelerated once more!");
+amphibiousCar.accelerate();
+console.log("amphibiousCar as Land Car new speed:");
+console.log(amphibiousCar.speed);
+console.log("Now we change the state of amphibiousCar to be water:");
+amphibiousCar.changeState();
+console.log("amphibiousCar current state:");
+console.log(amphibiousCar.state);
+console.log("amphibiousCar as Water Car initial speed:");
+console.log(amphibiousCar.speed);
+amphibiousCar.accelerate();
+console.log("amphibiousCar as Water Car is accelerated!");
+console.log("amphibiousCar as Water Car new speed:");
+console.log(amphibiousCar.speed);
+console.log("Now we change the spin direction of propellers!")
+amphibiousCar.switchSpinDirection();
+console.log("and amphibiousCar as Water car is accelerated once more time");
+console.log("amphibiousCar speed after last acceleration:");
+amphibiousCar.accelerate();
+console.log(amphibiousCar.speed);
+console.log("Now we change the state of amphibiousCar to be land again:");
+amphibiousCar.changeState();
+console.log("amphibiousCar current state:");
+console.log(amphibiousCar.state);
+console.log("amphibiousCar as Land Car initial speed:");
+console.log(amphibiousCar.speed);
+amphibiousCar.accelerate();
+console.log("amphibiousCar as Land Car is accelerated!");
+console.log("amphibiousCar as Land Car new speed:");
+console.log(amphibiousCar.speed);
+console.log("I THINK THAT'S ENOUGH TESTING:)");
+
+</script>
+</body>
+
+</html>

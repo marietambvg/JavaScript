@@ -1,0 +1,217 @@
+html, body, div, p, a, h1, h2, h3, ul, li, section, article, iframe{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    background-color: #ddd;
+    font-family: 'Segoe UI', Tahoma, Arial, verdana, sans-serif;
+}
+
+header {
+    padding: 20px 0;
+    background: #004400;
+}
+
+#quiz-wrap {
+    width: 960px;
+    margin: 0 auto;
+    box-shadow: 1px 1px 20px #000;
+}
+
+img{
+    width:350px;
+    height:200px;
+    margin-left:75px;
+}
+
+h1 {
+    text-align: center;
+    text-shadow: 1px 1px 15px #000;
+}
+
+h1 a{
+	color: #fff;
+	text-decoration: none;
+}
+
+h1 a:hover {
+	color: #ff0;
+}
+
+h2 {
+    color: #fb5;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 2px groove #006E4A;
+}
+
+h3{
+    font-size: 1em;
+    cursor: pointer;
+    padding: 20px;
+    background-color: #053;
+    border-bottom: 1px solid #095;
+}
+
+article {
+    float:left;
+    background-color: #207F60;
+    height: 700px;
+    width: 220px;
+    border: 1px solid #555;
+    border-top: 1px solid #60D4AE;
+    border-right: 1px solid #60D4AE;    
+}
+
+    #current-test-wrap {
+        width: 514px;
+    }
+
+section:after {
+    clear: both;
+    display: block;
+    content: " ";
+}
+
+footer {
+    padding: 5px 0;
+    text-align: center;
+    background-color: #006E4A;
+}
+
+.twitter-share-button{
+}
+
+#finish-btn{
+    margin: 10px;
+    background: #fff;
+    padding: 5px;
+    border: 0;
+    color: #095;
+    font-size: 1em;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px #000;
+    cursor: pointer;
+}
+
+#curr-test p{
+    display: inline;
+    vertical-align: top;
+    margin: 10px 20px;
+}
+
+ul#tests-holder,
+ul#scoreboard-holder,
+div#curr-test
+{
+    overflow: auto;
+    height: 620px;
+}
+
+div#curr-test
+{
+    color: white;
+}
+
+    div#curr-test div
+    {
+        border-bottom: 1px solid black;
+    }
+
+#welc-msg
+{
+	text-align: center;
+    margin-top: 20px;
+}
+
+#length-error {
+	display: none;
+	font-size: 12px;
+	color: red;
+}
+
+ul#tests-holder li{
+    padding: 0;
+    background: #040;
+    text-align: center;
+    border-bottom: 1px solid #fff;
+    cursor: pointer;
+}
+
+ul#tests-holder li:nth-child(2n){
+    background: #070;
+}
+    
+ul#tests-holder li a {
+    padding: 10px 70px;
+    line-height: 45px;
+    color: #fff;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    font-weight: bold;
+	text-decoration: none;
+}
+
+ul#tests-holder li:hover {
+    background: #090;
+}
+
+ul#tests-holder li:nth-child(2n+1):hover {
+    background: #020;
+}
+
+ul#tests-holder li:hover a
+{
+    color: #ff5;
+}
+
+#test-countdown {
+    height:50px;
+}
+
+ul#scoreboard-holder{
+    color: #fff;
+    font-size: 1.2em;
+}
+
+ul#scoreboard-holder li{
+    background: #040;
+    border-bottom: 1px solid #fff;
+}
+
+ul#scoreboard-holder li:nth-child(2n+1){
+    background: #070;
+}
+
+li {
+    list-style-type: none;
+    padding: 5px 0 5px 15px;
+}
+
+.answers
+{
+    background: #095;
+    border-bottom: 1px solid #053;
+}
+
+/*Some cool scrollbar styles for Chrome*/
+::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+/*IE scrollbar styles*/
+
+body {
+    scrollbar-face-color: #006E4A;
+}

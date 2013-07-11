@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    
+   
+    <script type="text/javascript">
+        function Solve(args) {
+	           var result;
+	           var operation;
+	           var firstData=true;
+	           var length=args.length;
+	           var inputLine;
+	           var workingLine;
+	           var functionValue={};
+	           var l,i,j,currentElement,a, start;
+	           function createArray(inputLine){
+	           	
+		           		workingLine=[];
+		           		
+			           	for ( j = 0; j < inputLine.length; j++) {
+			           		currentElement=inputLine[j].trim();
+			           		if ((currentElement!==null)&&(currentElement!==" ")&&(currentElement!=="")){
+			           			if(currentElement.contains("(")&&(currentElement.length>1)){
+				           			if (currentElement.contains("def")){
+				           				workingLine.push("(");
+				           				workingLine.push("def");
+
+				           			}
+				           		
+				           			else {
+				           				for (l = 0; l < currentElement.length; l++) {
+				           				workingLine.push(currentElement[l].trim());
+					           			}
+					           		}
+					           	}
+			   		           	
+			   		           	else if(currentElement.contains(")")&&(currentElement.length>1)){
+
+			   		           		if(currentElement.substring(0,currentElement.length-1).trim()!==""){
+			   		           		workingLine.push(currentElement.substring(0,currentElement.length-1).trim());
+				   		           	workingLine.push(currentElement[currentElement.length-1].trim());
+				   		           	}
+			   		           	}
+
+			   		           	else { 
+			   		           		workingLine.push(currentElement);
+			   		           	}
+				           }
+				       }
+				       return workingLine;	
+			       }
+
+			       	function CalculateInsideBrackets(workingLine){
+				      
+	       				var a = 3;
+
+	       				if(isNaN(parseInt(workingLine[2]))){
+   							result=functionValue[workingLine[2]]; 
+       					} else {
+       						result=parseInt(workingLine[2]);
+       					}
+	       				if (workingLine[1]!="def"){
+           					while(workingLine[a]!==")") {
+	           					var update;
+
+	           					if(isNaN(parseInt(workingLine[a]))){
+	           						update=functionValue[workingLine[a]];
+	           						
+	           					} else {
+	           						update=parseInt(workingLine[a]);
+	           						
+	           					}
+
+	           					switch(workingLine[1]){
+					           		//case +
+					       			case "+":{
+					       				result+=update;
+					       				break;
+					       			}
+					       			case "-":{
+					       				result-=update;
+					       				break;
+					       			}
+					       			case "*":{
+					       				result*=update;
+					       				break;
+					       			}
+					       			case "/":{
+					       				if (update===0)
+					       				{
+					       					return result="Division by zero! At Line:";
+					       				}
+					       				result/=update;
+					       				result=parseInt(result);
+					       				break;
+					       			}
+					       		}
+					       		a++;
+					       	}
+				       	} else 	{
+		       				var currentName=workingLine[2];
+
+		       				if (!isNaN(parseInt(workingLine[3]))) {
+			       			update=parseInt(workingLine[3]);
+			       			functionValue[currentName]=update;
+				       		} else {
+				       			var innerFunctionString="";
+				       			var position=3;
+				       			while(!workingLine[position].contains(")")){
+				       				innerFunctionString+=workingLine[position]+" ";
+				       				position++;
+				       			}
+
+				       			innerFunctionString+=workingLine[position]+" ";
+				       			//console.log(innerFunctionString);
+
+				       			workingLine=createArray(innerFunctionString.split(" "));
+				       			//console.log(workingLine.join(" "));
+
+			       				functionValue[currentName]=CalculateInsideBrackets(workingLine);
+			       				//console.log(functionValue[currentName]);
+				       		}
+				       		
+			       		}
+				       				//result=functionValue[];
+			       			
+		       			return result;
+		   			}
+			   			
+			   		
+
+	           for (i = 0; i < length; i++) {
+	           		result=0;
+
+	           		//read line
+	           		inputLine=args[i].split(" ");
+	           	
+			        workingLine=createArray(inputLine);
+			        //console.log(workingLine.join(" "));
+			        result=CalculateInsideBrackets(workingLine);
+			       	if (result==="Division by zero! At Line:"){
+			           	return result+=i+1;
+			       	} 
+		   		}
+		        
+	       return result;
+		}
+	
+        
+        function InputData() {
+            var args = ["(def func (+ 5 2))","(def func2 (/  func 5 2 1 0))","(def func3 (/ func 2))","(+ func3 func)"];
+            console.log(Solve(args));
+
+        }
+    </script>
+</head>
+<body onload="InputData()">
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+﻿<!-- Write a program that extracts from a given text all palindromes, e.g. "ABBA", "lamal", "exe".
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Extract palindromes</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div id="js-console">
+    </div>
+    <script src="scripts/js-console.js">	  
+    </script>
+    <script>
+        //Enter some input text
+
+        
+        function extractPalindromas(str) {
+
+        var words = str.replace(/,/g, " ").replace(/;/g, " ").replace(/:/g, " ").replace(/\?/g, " ").replace(/\!/g, " ").replace(/\./g, " ").replace(/\"/g, " ").split(" ");
+        //jsConsole.writeLine(words.length);
+        
+        
+        for (var i = 0; i < words.length; i++)
+        {
+            if ((words[i]!="")&&(words[i]!=" "))
+            {
+                
+                var check = false;
+                for (var j = 0; j < words[i].length/2; j++)
+                {
+                    if (words[i][j]!=words[i][words[i].length-j-1])
+                    {
+                        check = true;
+                        break;
+                    }
+                }
+                if ((check == false)&&words[i].length>1)
+                {
+                    jsConsole.writeLine(words[i]);
+                }
+            }
+        }
+    }
+
+        var str = "Write a program that extracts from a given text all palindromes, e.g. \"ABBA\", \"lamal\", \"exe\" ivi, civic.";
+        jsConsole.writeLine("Entered text: ")
+        jsConsole.writeLine(str);
+        jsConsole.writeLine();
+        jsConsole.writeLine("Extraxted palindromes:");
+        extractPalindromas(str);
+
+
+    </script>
+</body>
+</html>

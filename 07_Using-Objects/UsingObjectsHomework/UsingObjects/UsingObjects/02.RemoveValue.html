@@ -1,0 +1,32 @@
+﻿<!--Write a function that removes all elements with a given value -->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Remove value </title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    <script src="scripts/js-console.js"></script>
+    <script type="text/javascript">
+
+        var arr = [1, 2, 1, 4, 1, 3, 4, 1, 111, 3, 2, 1, "1"];
+       
+        Array.prototype.remove =  function(value){
+            
+            for (i = 0; i < this.length; i++) {
+                if (this[i] === value)
+                {
+                    this.splice(i, 1);
+                }
+            }
+            return this;
+        }
+        arr.remove(4);
+        jsConsole.writeLine("[" + arr.join(", ") + "]");
+        
+    </script>
+
+</body>
+</html>

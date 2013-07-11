@@ -1,0 +1,80 @@
+<!-- Visualize a string of tags (strings) in a given container
+By given minFontSize and maxFontSize, generate the tags with different font-size, depending on the number of occurrences -->
+<!-- var tags = ["cms", "javascript", "js", "ASP.NET MVC", ".net", ".net", "css", "wordpress", "xaml", "js", "http", "web", "asp.net", "asp.net MVC", "ASP.NET MVC", "wp", "javascript", "js", "cms", "html", "javascript", "http", "http", "CMS"]
+
+var tagCloud = generateTagCloud(tags,17,42); -->
+
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>DOM Manipulation -  tag cloud</title>
+	<style type="text/css">
+	div{
+		width:200px;
+		/*border-style: solid;
+		border-width: thin;*/
+	}
+	</style>
+	<script type="text/javascript">
+	function onGenerateTagCloudBtnClick(){
+
+	 	var tags = ["cms", "cms","javascript","javascript","javascript", "js", "ASP.NET MVC", ".net", ".net", "css", "wordpress", "xaml", "js", "http", "web", "asp.net", "asp.net MVC", "ASP.NET MVC", "wp", "javascript", "js", "cms", "html", "javascript", "http", "http", "CMS"];
+		var minFont=document.getElementById("minfont").value|0;
+		var maxFont=document.getElementById("maxfont").value|0;
+		
+	 	generateTagCloud(tags,minFont,maxFont);
+
+		 function generateTagCloud(tags, minFont, maxFont){
+	 		var countTags={};
+			for (var tag in tags){
+			 	if (!countTags[(tags[tag].toLowerCase())]){
+			 		countTags[(tags[tag].toLowerCase())]=1;
+			 	}
+			 	else countTags[(tags[tag].toLowerCase())]++;
+		 	}
+
+	 		var max=0;
+	 		var min=tags.length;
+	 		for (var tag in countTags) {
+	 			if (countTags[tag]>max) max=countTags[tag];
+	 			if (countTags[tag]<min) min=countTags[tag];
+	 		}
+	 		//calculate coefficient for generating font size of tags in the cloud
+	 		var factor=(maxFont-minFont)/(max-min);
+
+	 		var dFrag=document.createDocumentFragment();
+
+	 		for (var tag in countTags) {
+	 			var currentSpan=document.createElement("span");
+	 			var currentfont=parseInt((countTags[tag]-min)*factor+minFont);
+	 			currentSpan.innerHTML=tag+" ";
+	 			currentSpan.style.fontSize=currentfont+"px";
+	 			currentSpan.style.verticalAlign="top"
+	 			dFrag.appendChild(currentSpan);
+	 		}
+	 		document.getElementsByTagName("div")[0].appendChild(dFrag);
+	 	}
+	}
+	</script>
+</head>
+<body>
+
+<p>You have next string array:["cms", "cms","javascript","javascript","javascript", "js", "ASP.NET MVC", ".net", ".net", "css", "wordpress", "xaml", "js", "http", "web", "asp.net", "asp.net MVC", "ASP.NET MVC", "wp", "javascript", "js", "cms", "html", "javascript", "http", "http", "CMS"]</p>
+<p>Enter desired min and max value for the fonts in the tag cloud!</p>
+<p>Press "Generate tag cloud" button to generate clouds from the array!</p>
+
+<label for="minfont">Min font size</label>
+<input type="text" id="minfont" />
+</br></br>
+
+<label for="maxfont">Max font size</label>
+<input type="text" id="maxfont" />
+</br></br>
+
+<button onclick="onGenerateTagCloudBtnClick()">Generate tag cloud</button>
+<div></div>
+
+</body>
+</html>

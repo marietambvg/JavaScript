@@ -1,0 +1,23 @@
+﻿<!-- Write a boolean expression that checks for given integer if it can be divided (without remainder) by 7 and 5 in the same time -->
+<html>
+<head>
+	<title>Divided by 7 and 5</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<input type="text" id="input" value="0"/>
+	<div id="js-console"></div>
+	<script src="scripts/js-console.js"></script>
+	<script>
+		var number = parseInt(document.getElementById("input").value);
+		
+		jsConsole.writeLine("Enter some number in the text box above and press F5.");
+		jsConsole.writeLine("=====================================================");
+			
+		/*5 and 7 are mutualy simple thats why if a number can be divided by 7 and 5 in the same time it can divide 35 */ 
+		jsConsole.write("The entered number "+number+" is divided by 7 and 5 in the same time? - "+((number%5==0)&&(number%7==0)));						 
+								 
+	</script>
+</body>
+
+</html>

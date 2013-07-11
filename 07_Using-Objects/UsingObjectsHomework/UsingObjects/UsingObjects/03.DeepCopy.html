@@ -1,0 +1,89 @@
+﻿<!--Write a function that makes a deep copy of an object
+The function should work for both primitive and reference types
+ -->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Deep copy </title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    <script src="scripts/js-console.js"></script>
+    <script type="text/javascript">
+
+        
+
+        function copy(obj) {
+            if (obj instanceof Array) {
+                var newObj = new Array(obj.Length);
+                for (var i = 0; i < obj.length; i++) {
+                    var buffer = obj[i];
+                    newObj[i] = buffer;
+
+                }
+            }
+            else if (obj instanceof Object) {
+                newObj = new Object();
+                for (var i = 0; i < obj.length; i++) {
+                    buffer = obj[i];
+                    newObj[i] = buffer;
+
+                }
+
+            }
+            else newObj = obj;
+            return (newObj);
+        }
+        //copy all primitive types
+        var stringValue = "Ivanka";
+        var copyStringValue = copy(stringValue);
+        jsConsole.writeLine("Original string: " + stringValue + " ==> copied string: " + copyStringValue);
+        var numberValue = -1123;
+        var copyNumberValue = copy(numberValue);
+        jsConsole.writeLine("Original number: " + numberValue + " ==> copied number: " + copyNumberValue);
+        var boolValue = true;
+        var copyBoolValue = copy(boolValue);
+        jsConsole.writeLine("Original bool value: " + boolValue + " ==> copied bool value: " + copyBoolValue);
+        var nullValue = null;
+        var copyNullValue = copy(nullValue);
+        jsConsole.writeLine("Original null value: " + nullValue + " ==> copied null value: " + copyNullValue);
+        var undefinedValue;
+        var copyUndefinedValue = copy(undefinedValue);
+        jsConsole.writeLine("Original undefined: " + undefinedValue + " ==> copied undefined: " + copyUndefinedValue);
+        jsConsole.writeLine();
+
+        //copy array type
+        var arr = [1, 2, 1, 4, 1, 3, 4, 1, 111, 3, 2, 1, "1"];
+        var arrayValue = copy(arr);
+        jsConsole.writeLine("The array's elements after copy");
+        jsConsole.writeLine("================================");
+        printArrays();
+
+        //change the first element of original array to check whether it will affect copied array
+        arr[0] = 100;
+        jsConsole.writeLine("The array's elements after changing the first element of original array to 100");
+        jsConsole.writeLine("===============================================================================");
+        printArrays();
+
+        //change the first element of copied array to check whether it will affect original one
+        arrayValue[0] = 200;
+        jsConsole.writeLine("The array's elements after changing the first element of copy array to 200");
+        jsConsole.writeLine("==========================================================================");
+        printArrays();
+
+        function printArrays() {
+            jsConsole.writeLine("Original array");
+            jsConsole.writeLine("[" + arr.join(", ") + "]");
+            jsConsole.writeLine("Copied array");
+            jsConsole.writeLine("[" + arrayValue.join(", ") + "]");
+            jsConsole.writeLine();
+
+        }
+
+
+    </script>
+
+</body>
+</html>

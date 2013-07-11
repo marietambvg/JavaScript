@@ -1,0 +1,50 @@
+﻿<!--Write a function that checks if the element at given position in given array of 
+    integers is bigger than its two neighbors (when such exist).-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Check if the element on given position is bigger than its heighbours </title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <label for="tb-number">Enter the index of number in array you want to check: </label>
+    <input id="tb-number" type="text" class="js-console-input" />
+    <button id="btn-check-prime" onclick="onBtnClick()">Find result</button>
+    <div id="js-console"></div>
+    <script src="scripts/js-console.js"></script>
+    <script type="text/javascript">
+        var arr = [2, 2, 3, 4, 5, 3, 5, 3, -1, 23, 3];
+        jsConsole.writeLine("You have following array: [" + arr.join(", ") + "]");
+        function onBtnClick() {
+            var n = jsConsole.readInteger("#tb-number");
+             checkBigger(n, arr);
+
+
+
+            function checkBigger(number, array) {
+               
+                    if (number == 0) {
+                        jsConsole.write("The number has only one neighbour. ");
+                        if (array[0] > array[1]) jsConsole.writeLine("And the entered number is bigger than its only neighbour.");
+                        else jsConsole.writeLine("And the entered number is not bigger than its only neighbour.");
+                    }
+                    else if (number == array.length - 1) {
+                        jsConsole.write("The number has only one neighbour. ");
+                        if (array[number] > array[number - 1]) jsConsole.writeLine("And the entered number is bigger than its only neighbour.");
+                        else jsConsole.writeLine("And the entered number is not bigger than its only neighbour.");
+                    }
+                    else {
+                        if ((array[number] > array[number - 1]) && (array[number] > array[number + 1])) jsConsole.writeLine("The entered number is bigger than its two neighbours.");
+                        else jsConsole.writeLine("The entered number is not bigger than its two neighbours.");
+
+                    }
+
+                }
+            
+        }
+
+    </script>
+
+</body>
+</html>

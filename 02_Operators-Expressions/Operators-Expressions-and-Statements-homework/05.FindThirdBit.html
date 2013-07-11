@@ -1,0 +1,35 @@
+﻿<!-- Write a boolean expression for finding if the bit 3 (counting from 0) of a given integer is 1 or 0.
+  -->
+<html>
+<head>
+	<title>Third bit</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<input type="text" id="input" />
+	
+	<div id="js-console"></div>
+	<script src="scripts/js-console.js"></script>
+	<script>
+		var number = parseInt(document.getElementById("input").value);
+		
+		//!!!!!input data work only with Firefox!!!!!
+		jsConsole.writeLine("Enter the number you want to check in the above text box and press F5");
+		jsConsole.writeLine("=====================================================================");
+		
+		if (isNaN(number)) 
+			{
+				jsConsole.writeLine("Enter valid data!");
+			}
+		else 
+				
+				if(((1<<3)&number)>>3)
+				jsConsole.write("The third bit of entered number is 1!")
+					else jsConsole.write("The third bit of entered number is 0!");
+
+			
+						 
+	</script>
+</body>
+
+</html>

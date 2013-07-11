@@ -1,0 +1,82 @@
+﻿<!-- Write a script that shims querySelector and querySelectorAll in older browsers -->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>DOM Manipulation -  my tests</title>
+	<style type="text/css">
+	p {
+		
+		color:blue;
+		font-family: Times New Roman;
+		font-size:15px;
+		font-weight: bold;
+		display:block;
+		width:500px;
+	}
+	</style>
+	
+</head>
+<body>
+<p>These are the divs before run "querySelectorAll"</p>
+<p>Press button "Select DIVs" to see result after "querySelectorAll"</p>
+
+<button onclick="onQuerySecelectALLDivsButtonClick()">Select divs</button>
+<div>unselected</div>
+<div>unselected</div>
+<div>unselected</div>
+<div>unselected</div>
+<div>unselected</div>
+
+<script type="text/javascript">
+	function onQuerySecelectALLDivsButtonClick(){
+	    (function () {
+            'use strict';
+ 				
+                if (!document.querySelectorAll) {
+                    querySelectorShiv();
+                }
+               
+                var testDiv = document.querySelectorAll("div");
+
+                for (var i = 0; i < testDiv.length; i++) {
+                	testDiv[i].innerHTML="selected";
+                	testDiv[i].style.width="100px";
+                	testDiv[i].style.height="20px";
+                	testDiv[i].style.borderStyle="solid";
+                	testDiv[i].style.borderRadius="15px";
+                	testDiv[i].style.backgroundColor = "blue";
+					testDiv[i].style.color="orange";
+					testDiv[i].style.textAlign="center";
+					testDiv[i].style.padding="10px";
+					testDiv[i].style.marginBottom="10px";
+					testDiv[i].style.display="inline-block"
+                }
+ 
+            function querySelectorShiv() {
+           
+                document.querySelector = function querySelector(selector) {
+                    switch (selector.charAt(0)) {
+                        case "#": return document.getElementById(selector.substring(1));
+                        case ".": return document.getElementsByClassName(selector.substring(1))[0];
+                        // element by tag name
+                        default: return document.getElementsByTagName(selector)[0];
+                    }
+	            }
+ 
+                document.querySelectorAll = function querySelectorAll(selector) {
+                    switch (selector.charAt(0)) {
+                        case "#": return document.getElementById(selector.substring(1));
+                        case ".": return document.getElementsByClassName(selector.substring(1));
+                        // element by tag name
+                        default: return document.getElementsByTagName(selector);
+                    }
+                };
+            }
+        })();
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+﻿<!-- Write an expression that checks for given point (x, y) if it is within the circle K( (1,1), 3)
+ and out of the rectangle R(top=1, left=-1, width=6, height=2).
+  -->
+<html>
+<head>
+	<title>Within circle and out of rectangle area</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<input type="text" id="inputX" />
+	<input type="text" id="inputY" />
+	
+	<div id="js-console"></div>
+	<script src="scripts/js-console.js"></script>
+	<script>
+		var x = parseFloat(document.getElementById("inputX").value);
+		var y = parseFloat(document.getElementById("inputY").value);
+		
+		//!!!!!input data work only with Firefox!!!!!
+		jsConsole.writeLine("Enter the x and y coordinates of the point you want to check and press F5");
+		jsConsole.writeLine("=======================================================================");
+		
+		if (isNaN(x)||isNaN(y)) jsConsole.write("Enter valid data!")
+			else  if (((x - 1) * (x - 1) + (y - 1) * (y - 1)) > 9)
+        {
+            jsConsole.writeLine("The point isn't within a circle .");
+        }
+        else
+        {
+            if ((x < -1) || (y > 1) || (y < -1))// do not check if x>5 because in that case it will be outside the circle area
+            {
+                jsConsole.writeLine("The point is within a circle K(0,5) and out of rectangle.");
+            }
+            else
+            {
+                jsConsole.writeLine("The point isn't within a circle and out of rectangle.");
+            }
+        }
+		
+	</script>
+</body>
+
+</html>

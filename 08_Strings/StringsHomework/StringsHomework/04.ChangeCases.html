@@ -1,0 +1,101 @@
+﻿<!--You are given a text. Write a function that changes the text in all regions:
+<upcase>text</upcase> to uppercase.
+<lowcase>text</lowcase> to lowercase
+<mixcase>text</mixcase> to mix casing(random)
+
+    We are <mixcase>living</mixcase> in a <upcase>yellow submarine</upcase>. 
+    We <mixcase>don't</mixcase> have <lowcase>ANYTHING</lowcase> else.
+
+The expected result:
+    We are LiVinG in a YELLOW SUBMARINE. We dOn'T have anything else.
+
+Regions can be nested
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Change cases</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+    
+</head>
+<body>
+    <div id="js-console"></div>
+    <script src="scripts/js-console.js"></script>
+    <script>
+        String.prototype.htmlEscape = function () {
+            return this.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, "&#39").replace(/ /g, "&nbsp;");
+        }
+        function changeCase(string) {
+            var length = string.length;
+            var result = "";
+            var start = 0;
+            var end = 0;
+            for (var i = 0; i < length; i++) {
+
+                if (string.indexOf("<", i) < 0) {
+                    result = result + string.substring(i, length);
+                    break;
+                }
+                else {
+                    start = string.indexOf("<", i);
+                    result = result + string.substring(end, start);
+
+                    if (string[start + 1] == "u")//check if upcase
+                    {
+                        //change to uppercase
+                        var end = string.indexOf("</upcase>", i);
+                        result = result + string.substring(start + 8, end).toUpperCase();
+
+                        //if there are any tags nested in <upcase></upcase> we ignore them because the most outside tag is strongest
+                        result.replace("<lowcase>", "").replace("</lowcase>", "").replace("<upcase>", "").replace("</upcase>", "").replace("<mixcase>", "").replace("</mixcase>", "");
+                        i = end + 9;
+                        end = end + 9;
+                    }
+                    else if (string[start + 1] == "l")//check if lowcase
+                    {
+                        //change to lowcase
+                        var end = string.indexOf("</lowcase>", i);
+                        result = result + string.substring(start + 9, end).toLowerCase();
+
+                        //if there are any tags nested in <lowcase></lowcase> we ignore them because the most outside tag is strongest
+                        result.replace("<lowcase>", "").replace("</lowcase>", "").replace("<upcase>", "").replace("</upcase>", "").replace("<mixcase>", "").replace("</mixcase>", "");
+                        i = end + 10;
+                        end = end + 10;
+                    }
+                    else if (string[start + 1] == "m")//check if mixcase
+                    {
+                        //change to lowcase
+                        var end = string.indexOf("</mixcase>", i);
+                        for (var j = start + 9; j < end; j++) {
+                            var random = Math.random();
+                            //jsConsole.write(random);
+                            if (random < 0.5) {
+                                result = result + string[j].toLowerCase();
+                            }
+                            else result = result + string[j].toUpperCase();
+                        }
+
+
+                        //if there are any tags nested in <mixcase></mixcase> we ignore them because the most outside tag is strongest
+                        result.replace("<lowcase>", "").replace("</lowcase>", "").replace("<upcase>", "").replace("</upcase>", "").replace("<mixcase>", "").replace("</mixcase>", "");
+                        i = end + 10;
+                        end = end + 10;
+                    }
+                }
+
+            }
+            return result;
+        }
+        jsConsole.writeLine("!!!!Press F5 to see how mixed case are changing!!!!");
+        jsConsole.writeLine("=====================================================");
+        jsConsole.writeLine("Original text:");
+        var testString = "We are <mixcase><upcase>living</upcase></mixcase> in a  <upcase>yellow submarine</upcase>.We <mixcase><upcase>don't</upcase></mixcase> have <lowcase>ANYTHING</lowcase>  else.";
+        jsConsole.writeLine(testString.htmlEscape());
+        jsConsole.writeLine();
+        jsConsole.writeLine("Result text:");
+        jsConsole.writeLine(changeCase(testString));
+        //var lowcasework=lowcase(upcasework);
+        </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+﻿<!-- Write an expression that calculates trapezoid's area by given sides a and b and height h  -->
+<html>
+<head>
+	<title>Trapezoid area</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<input type="text" id="a" value="enter side a"/>
+	<input type="text" id="b" value="enter side b"/>
+	<input type="text" id="h" value="enter height"/>
+	
+	<div id="js-console"></div>
+	<script src="scripts/js-console.js"></script>
+	<script>
+		var sideA = parseFloat(document.getElementById("a").value);
+		var sideB = parseFloat(document.getElementById("b").value);
+		var height = parseFloat(document.getElementById("h").value);
+		
+		//!!!!!input data work only with Firefox!!!!!
+		jsConsole.writeLine("Enter the sides and height of trapezoid");
+		jsConsole.writeLine("=====================================================================");
+		
+		if (isNaN(sideA)||isNaN(sideB)||isNaN(height)||(sideA<0)||(sideB<0)||(height<0)) jsConsole.write("Enter valid data!")
+		else jsConsole.write("The area of trapezoid is:"+((sideA+sideB)*height/2));
+			
+								 
+	</script>
+</body>
+
+</html>

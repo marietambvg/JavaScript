@@ -1,0 +1,83 @@
+﻿<!--Write functions for working with shapes in  standard Planar coordinate system
+Points are represented by coordinates P(X, Y)
+Lines are represented by two points, marking their beginning and ending
+L(P1(X1,Y1),P2(X2,Y2))
+Calculate the distance between two points
+Check if three segment lines can form a triangle
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Shapes </title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    <script src="scripts/js-console.js"></script>
+    <script type="text/javascript">
+
+        //create point
+        function point(name,x, y) {
+            return {
+                name:name,
+                x: x,
+                y: y,
+                toString:function returnPoint(){
+                    return  this.name+" (" + this.x+" "+this.y +")";
+                }
+            }
+        }
+        //calculate distance between two points
+        function distance(pointA, pointB)
+        {
+            return (Math.sqrt((pointA.x - pointB.x) * (pointA.x - pointB.x) + (pointA.y - pointB.y) * (pointA.y - pointB.y)));
+        }
+        
+        var A = point("A", 0, 8);
+        var B = point("B", 5, 8);
+        var C = point("C", 1, 1);
+        var D = point("D", 1, 9);
+        var E = point("E", 4, 4);
+        var F = point("F", 9, 12);
+
+        //print distances between some points
+        jsConsole.writeLine("The distance between point '" + A.name + "' and point '" + B.name + "' is: " + distance(A, B));
+        jsConsole.writeLine("The distance between point '" + C.name + "' and point '" + D.name + "' is: " + distance(C, D));
+
+        //create lines
+        function line(name, pointA, pointB) {
+            return {
+                name: name,
+                pointA: pointA,
+                pointB:pointB,
+                length: distance(pointA, pointB),
+                toString: function lineToString() {
+                    return (this.name + " (" + this.pointA + "; " + this.pointB + ")");
+                }
+            }
+
+        }
+        //initialize lines
+        var lineA = line("lineA",A,B);
+        var lineB = line("lineB", C, D);
+        var lineC = line("lineC", E, F);
+        jsConsole.writeLine(lineA);
+        jsConsole.writeLine(lineB);
+        jsConsole.writeLine(lineC);
+
+        
+
+        //calculate if can form triangle
+        function formTriange(lineA, lineB, lineC) {
+            if (lineA.length > 0 && lineB.length > 0 && lineC.length > 0 && (lineA.length + lineB.length > lineC.length) && (lineA.length + lineC.length > lineB.length) && (lineC.length + lineB.length > lineA.length))
+                return ("The lines: "+lineA+", "+lineB+" and "+ lineC+" can form triangle.");
+            else return ("The lines: " + lineA + ", " + lineB + " and " + lineC + " can't form triangle.");
+        }
+       jsConsole.writeLine( formTriange(lineA, lineB, lineC));
+
+
+    </script>
+
+</body>
+</html>

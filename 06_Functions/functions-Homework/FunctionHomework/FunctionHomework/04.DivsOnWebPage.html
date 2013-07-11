@@ -1,0 +1,22 @@
+﻿//Write a function to count the number of divs on the web page
+
+<html>
+<head>
+    <title>Find number of divs on the web page </title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    <script src="scripts/js-console.js"></script>
+    <script type="text/javascript">
+        countDivsOnWebPage();
+
+        function countDivsOnWebPage() {
+            var count = document.getElementsByTagName("div").length;
+            jsConsole.writeLine("The number of divs in your web page is " + count);
+        }
+
+        </script>
+
+</body>
+</html>

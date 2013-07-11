@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Capitals Map</title>
+    <script src="Scripts/object-create.js"></script>
+    <script src="Scripts/jquery-2.0.2.js"></script>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta charset="utf-8" />
+    <!-- Add styles for width and height -->
+    <style>
+        html, body, #map-canvas {
+            margin: 0;
+            padding: 0;
+            height: 250px;
+            width: 500px;
+            font-family: Verdana;
+            font-size: 12px;
+            text-align: center;
+        }
+        #capitals li{
+            display:inline;
+            padding:5px;
+            font-weight:bold;
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+</head>
+<body>
+    <div><ul id="capitals">
+        <li id="0"><a href="#">Benjjin</a></li>
+        <li id="1"><a href="#">NewDelhi</a></li>
+        <li id="2"><a href="#">Bangkokg</a></li>
+        <li id="3"><a href="#">Hanoi</a></li>
+        <li id="4"><a href="#">Istanbul</a></li>
+        <li id="5"><a href="#">Tokyo</a></li>
+        <li id="6"><a href="#">Brasilia</a></li>
+        <li id="7"><a href="#">Mexico City</a></li>
+        <li id="8"><a href="#">Santiago</a></li>
+        <li id="9"><a href="#">Cairo</a></li>
+        <li id="10"><a href="#">Moscow</a></li>
+
+        </ul>
+
+    </div>
+    <h1 id="header"></h1>
+    
+    <div id="map-canvas"></div>
+    <div id="info"></div>
+    
+    <button id="prev">Previous</button>
+    <button id="next">Next</button>
+
+   
+    <script src="Scripts/capital-slider.js"></script>
+</body>
+</html>

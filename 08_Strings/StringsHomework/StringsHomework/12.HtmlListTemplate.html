@@ -1,0 +1,74 @@
+﻿<!--Write a function that creates a HTML UL using a template for every HTML LI. The source of the list should be an array of elements. Replace all placeholders marked with –{…}–   with the value of the corresponding property of the object. Example: 
+<div data-type="template" id="list-item">
+ <strong>-{name}-</strong> <span>-{age}-</span>
+/div>
+var people = [{name: "Peter", age: 14},…];
+var tmpl = document.getElementById("list-item").innerHtml;
+var peopleList = generateList(people,template);
+//peopleList = "<ul><li><strong>Peter</strong> <span>14</span></li><li>…</li>…</ul>"
+
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Create HTML list</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div id="js-console">
+    </div>
+    <script src="scripts/js-console.js">	  
+    </script>
+   
+       
+    <div data-type="template" id="list-item">
+    <strong>-{name}-</strong> <span>-{age}-</span>
+    </div>
+    
+    <div id="ul-result"></div>
+        <script>
+            function generateList(array, template) {
+            var result = "<ul>";
+                var re = /-{(.*?)}-/;
+                //debugger;
+                for (var i in array) {
+                    var listItem = template;
+                    var match;
+                    while (match = listItem.match(re)) {
+                        var replacementValue = array[i][match[1]];
+                        listItem = listItem.replace(re, replacementValue);
+                    }
+ 
+                   
+                    result += "<li>" + listItem + "</li>";
+                }
+ 
+                result += "</ul>";
+                return result;
+            }
+ 
+ 
+            var people =
+            [
+                { name: "Eduard Stefanov", age: 43 },
+                { name: "Krasimir Karakanovski", age: 24 },
+                { name: "Ivan Vazov", age:101 },
+                { name: "Biliana Georgieva", age: 14 },
+                { name: "Petar Georgiev", age: 15 },
+               
+            ];
+ 
+            var template = document.getElementById("list-item").innerHTML;
+            var peopleList = generateList(people, template);
+            jsConsole.writeLine(peopleList);
+ 
+            
+ 
+        </script>
+</body>
+</html>
+    </script>
+</body>
+</html>

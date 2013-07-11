@@ -1,0 +1,62 @@
+﻿<!-- Finds the index of given element in a sorted array
+     of integers by using the binary search algorithm   -->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Binary Search</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<label for="tb-number">Number: </label>
+	<input type="text" id="tb-number" />
+	<button id="btn-check-prime" onclick="onBtnClick()">Find index</button>
+	<div id="js-console">
+	</div>
+	<script src="scripts/js-console.js">	  
+	</script>
+	<script>
+		//Enter some input text
+
+			//               0  1  2  3  4  5  6  7   8   9  10  11
+            var sortedArr = [1, 2, 3, 4, 5, 6, 7, 8, 45, 56, 67, 87 ] ;
+
+            jsConsole.write("The sorted array: ")
+            sortedArr.forEach(function(item){jsConsole.write(item+" ")});
+            jsConsole.writeLine();
+
+            jsConsole.write("Indexes of array: ");
+            var i=-1;
+            sortedArr.forEach(function(item){jsConsole.write(++i+" ")});
+            jsConsole.writeLine();
+
+            jsConsole.writeLine("Enter the number, which index you want to find (or check)!");
+
+            function onBtnClick() {
+            var indexMin = 0;
+            var indexMax = (sortedArr.length - 1);
+            var indexMid;
+            var check=true;
+			var key = jsConsole.readInteger("#tb-number");
+            
+            indexMid = parseInt((indexMax - indexMin) / 2);
+            while (indexMin<=indexMax)
+            {
+                
+                if (key < sortedArr[indexMin+indexMid]) indexMax = indexMax-indexMid-1;
+                else if (key > sortedArr[indexMin+indexMid]) indexMin = indexMin+indexMid+1;
+                else
+                {
+                    jsConsole.writeLine("The number "+ key+" has "+(indexMin+indexMid)+" index.");
+                    check=false;
+                    break;
+                }
+                 indexMid = parseInt((indexMax - indexMin) / 2);
+            }
+            if (check==true) jsConsole.writeLine("The key is not found.");
+            
+        }
+		
+	</script>
+</body>
+</html>

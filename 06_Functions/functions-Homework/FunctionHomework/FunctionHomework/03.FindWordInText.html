@@ -1,0 +1,76 @@
+﻿<!-- Write a function that finds all the occurrences of word in a text
+The search can case sensitive or case insensitive
+Use function overloading-->
+
+<html>
+<head>
+    <title>Functions - Overloading</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    <script src="scripts/js-console.js"></script>
+    <script type="text/javascript">
+        
+        function findWord(text, word, casesensitive) {
+
+            var textlength = text.length;
+            var wordlength = word.length;
+            var count = 0;
+            switch (arguments.length) {
+
+                //when we don't have parameters for casesensitive we assume that search will be case sensitive
+                case 2:
+                    {
+                        for (var i = 0; i < (textlength - wordlength) ; i++) {
+                            //jsConsole.writeLine((text.substring(i, i + wordlength) + " " + word + " " + (text.substring(i, i + wordlength) == word)));
+                            if ((text.substring(i, i + wordlength) == word)) {
+                                count++;
+                               // jsConsole.writeLine("count = " + count);
+                            }
+                        }
+                        jsConsole.writeLine('In text "' + text + '" word "' + word + '" occures ' + count + " times. Cosider case sensitive searching.");
+                        jsConsole.writeLine();
+                        break;
+                    }
+                case 3:
+                    {
+                        if (casesensitive == true) {
+                            for (var i = 0; i < (textlength - wordlength) ; i++) {
+                               // jsConsole.writeLine((text.substring(i, i + wordlength) + " " + word + " " + (text.substring(i, i + wordlength) == word)));
+                                if ((text.substring(i, i + wordlength) == word)) {
+                                    count++;
+                                    //jsConsole.writeLine("count = " + count);
+                                }
+                            }
+                            jsConsole.writeLine('In text "' + text + '" word "' + word + '" occures ' + count + " times. Cosider case sensitive searching.");
+                            jsConsole.writeLine();
+                        }
+                        else {
+
+                            for (var i = 0; i < (textlength - wordlength) ; i++) {
+                                //jsConsole.writeLine((text.substring(i, i + wordlength).toLowerCase() + " " + word.toLowerCase() + " " + (text.substring(i, i + wordlength).toLowerCase() == word.toLowerCase())));
+                                if ((text.substring(i, i + wordlength).toLowerCase() == word.toLowerCase())) {
+                                    count++;
+                                    //jsConsole.writeLine("count = " + count);
+                                }
+                            }
+                            jsConsole.writeLine('In text "'+text+'" word "'+word+'" occures '+count+ " times. Cosider case insensitive searching.");
+                            jsConsole.writeLine();
+                        }
+                        break;
+                    }
+            }
+        };
+        
+
+        var text = "When I was born my parents named me Pesho Ivanov, and still my name is Pesho Ivanov and now I am 102 years old. Two years ago my first name was Pesho, and my last name was Ivanov. ";
+        findWord(text, "pesho");
+        findWord(text, "pesho", false);
+        findWord(text, "pesho", true);
+
+
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+﻿<!--Write a function that counts how many times given number appears in given array. Write a test function to check if the function is working correctly.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Find number in array </title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <label for="tb-number">Enter Number you want to find: </label>
+    <input id="tb-number" type="text" class="js-console-input" />
+    <button id="btn-check-prime" onclick="onBtnClick()">Find number</button>
+    <div id="js-console"></div>
+    <script src="scripts/js-console.js"></script>
+    <script type="text/javascript">
+        var arr = [2, 2, 3, 4, 5, 3, 5, 3, -1, 23, 3];
+        jsConsole.writeLine("You have following array: ["+arr.join(", ")+"]");
+        function onBtnClick() {
+            var n = jsConsole.readInteger("#tb-number");
+            var count = 0;
+            findNumber(n, arr);
+            
+            
+
+            function findNumber(number, array) {
+                for (var i = 0; i < array.length; i++) {
+                    if (number == array[i]) count++;
+                }
+                jsConsole.writeLine("The number " + n + " appears in the array " + count + " times.");
+                test(number);
+           
+            function test(number) {
+                if ((number == 2) || (count == 2)) jsConsole.writeLine("The test is successful");
+                else if ((number == 3) || (count == 4)) jsConsole.writeLine("The test is successful");
+                else if ((number == 4) || (count == 1)) jsConsole.writeLine("The test is successful");
+                else if ((number == 5) || (count == 2)) jsConsole.writeLine("The test is successful");
+                else if ((number == -1) || (count == 1)) jsConsole.writeLine("The test is successful");
+                else if ((number == 23) || (count == 1)) jsConsole.writeLine("The test is successful");
+                else if ((number != 2) && (number != 3) && (number != 4) && (number != 5) && (number != -1) && (number != 23) && (count == 0)) jsConsole.writeLine("The test is successful");
+                else jsConsole.writeLine("The test is unsuccessful")
+            } }
+        }
+
+    </script>
+
+</body>
+</html>

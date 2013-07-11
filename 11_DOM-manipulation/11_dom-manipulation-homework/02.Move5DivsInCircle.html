@@ -1,0 +1,73 @@
+<!-- Write a script that creates 5 div elements and moves them in circular path with interval of 100 milliseconds
+ -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+	<title>DOM Manipulation -  Rotate five divs</title>
+	<style type="text/css">
+	
+	</style>
+	</head>
+	<body>
+	<script type="text/javascript">
+		
+		var i = 0;
+		for(i = 0; i < 5; i++) {
+			createRandomDiv();
+		}
+
+		var allDivs = document.querySelectorAll("div");
+		var angle = 0;
+		var radius = 100;
+		animateDiv();
+
+		function animateDiv () {
+			for(i = 0; i < 5; i++) {
+				allDivs[i].style.left = Math.cos(angle + 2 * Math.PI / allDivs.length * i)/radius * 10000 + 'px';
+				allDivs[i].style.top = Math.sin(angle + 2 * Math.PI / allDivs.length* i)/radius * 10000 + 'px';
+			}
+			angle = angle + 0.1;
+			setTimeout(animateDiv, 100);
+		}
+
+		
+		function getRandomNumber(min, max) {
+	  		return parseInt(Math.random() * (max - min) + min);
+		}
+
+		function generateRandomColor() {
+			var red = (Math.random() * 256) | 0;
+			var green = (Math.random() * 256) | 0;
+			var blue = (Math.random() * 256) | 0;
+
+			return "rgb(" + red + "," + green + "," + blue + ")";
+		}
+
+		function createRandomDiv(){
+			var divList=document.createElement("div");
+			divList.style.width="50px";
+			divList.style.height="50px";
+			divList.style.margin = 200 + 'px';
+			divList.style.backgroundColor = generateRandomColor();
+			divList.style.color=generateRandomColor();
+			divList.style.position="absolute";
+			divList.style.borderStyle=['solid', 'dashed', 'dotted'][getRandomNumber(0,3)];
+			divList.style.borderColor=generateRandomColor();
+			divList.style.borderRadius="25px";
+			divList.style.borderWidth="thin";
+			var innerStrong=document.createElement("strong");
+			innerStrong.innerHTML="div";
+			innerStrong.style.position="relative";
+			innerStrong.style.top="15px";
+			innerStrong.style.fontSize="14px";
+			divList.appendChild(innerStrong);
+			divList.style.textAlign="center";
+			document.body.appendChild(divList);
+		}
+
+		
+	</script>
+
+</body>
+</html>

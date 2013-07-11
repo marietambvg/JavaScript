@@ -1,0 +1,45 @@
+﻿<!-- Write a script that finds the max and min number from a sequence of numbers
+ -->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Find min and max in the sequence</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	
+	
+	<div id="js-console">
+	</div>
+	<script src="scripts/js-console.js">	  
+	</script>
+	<script>
+		//Enter some input text
+
+		jsConsole.write("The sequence is :");
+		
+		var numbers = [34, -89, 12,1000, -100, 0];
+
+			
+			var min=numbers[0];
+			var max=numbers[0];
+			//some logic here
+			
+			for (var i = 0; i <numbers.length; i++) {
+				
+				jsConsole.write(numbers[i]+ " ");
+				if (numbers[i]<min) min=numbers[i];
+				if (numbers[i]>max) max=numbers[i];
+				}
+			
+			jsConsole.writeLine();	
+			jsConsole.writeLine("The smallest number is: "+min);
+			jsConsole.writeLine("The biggest number is: "+max);
+
+			//print result here
+			
+	
+	</script>
+</body>
+</html>

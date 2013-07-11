@@ -1,0 +1,73 @@
+﻿<!-- Write a script that parses an URL address given in the format:
+		and extracts from it the [protocol], [server] and [resource] elements. Return the elements in a JSON object.For example 
+		from the URL http://www.devbg.org/forum/index.php the following information should be extracted:
+		{protocol: "http",
+		server: "www.devbg.org", 
+ resource: "/forum/index.php"}
+ -->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Remove HTML tags</title>
+	 <link href="styles/js-console.css" rel="stylesheet" />
+	
+</head>
+<body>
+	<label for="tb-text">Enter data: </label>
+	<textarea style="width:500px; height:50px" id="tb-text"></textarea>
+	<button id="btn-remove-HTML" onclick="onBtnClick()">Check result</button>
+	
+	 <div id="js-console"></div>
+    <script src="scripts/js-console.js"></script>
+	
+	<script>
+
+	//create function for building JSON protocols
+	function buildProtocol(prot,server,resource){
+  	return {
+    prot:prot, 
+    server:server,
+    resource:resource,
+    toString:function (){return '{protocol: "' +this.prot + '",<br />' + 'server: "'+ this.server+'",<br />' +'resource: "'+ this.resource+'"}';}
+  }
+}
+
+	   	function extractProtocol(text){
+	   		//extract protocols
+	   		var end=0;
+	   		start=0;
+	   		end=text.indexOf("://");
+	   		var prot=text.substring(start,end);
+	   		//extract server
+	   		start=end+3;
+	   		end=text.indexOf("/",start);
+	   		var server=text.substring(start,end);
+	   		//extract resource
+	   		start=end+1;
+	   		end=text.length-1;
+	   		var resource=text.substring(start,end);
+	   		
+	   		//create JSON protocol
+			var extracted=buildProtocol(prot,server,resource);
+	   
+	   return extracted;
+	}
+	function onBtnClick() {
+
+	var text = jsConsole.read("#tb-text");
+	var newText=extractProtocol(text);
+
+    jsConsole.writeLine(newText);
+    //check properties of JSON if you wish
+   // jsConsole.writeLine(newText.prot);
+    //jsConsole.writeLine(newText.server);
+    
+	
+	
+}
+
+	</script>
+
+</body>
+</html>

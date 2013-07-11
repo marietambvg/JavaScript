@@ -1,0 +1,57 @@
+﻿<!--Write a function that groups an array of persons by age, first or last name. The function must return an associative array, with keys - the groups, and values -arrays with persons in this groups
+Use function overloading (i.e. just one function) -->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Groups of persons </title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    <script src="scripts/js-console.js"></script>
+    <script type="text/javascript">
+
+        
+        var persons = [
+              { firstname: "George", lastname: "Petrov", age: 32 },
+              { firstname: "Petar", lastname: "Ivanov", age: 32 },
+              { firstname: "George", lastname: "Ivanov", age: 44 },
+              { firstname: "Petar", lastname: "Lazarov", age: 9 },
+              { firstname: "Stoyan", lastname: "Aleksandrov", age: 9 },
+        ];
+        
+        var groupedByFname = group(persons, "firstname");
+        var groupedByLname = group(persons, "lastname");
+        var groupedByAge = group(persons, "age");
+        
+        //create groups by criteria
+        function group(persons,criteria) {
+           
+                var groupa = {};
+                for (var person in persons) {
+                    //if we don't have group with current criteria we create new array with this criteria
+                    if (!groupa[persons[person][criteria]]) {
+                        groupa[persons[person][criteria]] = [];
+                    }
+                    //if we  have group with current criteria we add current person to it in apprporiate format
+                    var current = persons[person].firstname + " " + persons[person].lastname + " " + persons[person].age + " years old."
+                    groupa[persons[person][criteria]].push(current);
+                }
+                //print persons grouped by criteria
+                jsConsole.writeLine('Grouped by '+criteria);
+                for (var name in groupa) {
+                    jsConsole.writeLine('Group "' + name + '":');
+                    jsConsole.writeLine("-----------------------");
+                    for (var member in groupa[name]) {
+                        jsConsole.writeLine(groupa[name][member]);
+                    }
+                    jsConsole.writeLine();
+                }
+        
+                }
+            
+    </script>
+
+</body>
+</html>

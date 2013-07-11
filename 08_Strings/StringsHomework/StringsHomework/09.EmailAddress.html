@@ -1,0 +1,120 @@
+﻿<!-- Write a function for extracting all email addresses from given text. All substrings that match the format <identifier>@<host>…<domain> should be recognized as emails. Return the emails as array of strings.
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Email check</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div id="js-console">
+    </div>
+    <script src="scripts/js-console.js">	  
+    </script>
+    <script>
+        //Enter some input text
+
+        function isLetter(str) {
+            return str.length === 1 && str.match(/[a-z]/i);
+        }
+        function extractEmails(str) {
+
+            var input = str.replace(/,/g, " ").replace(/;/g, " ").replace(/:/g, " ").replace(/\?/g, " ").replace(/\!/g, " ").split(" ");
+            var emails = {};
+            var words = {};
+            var i = 0;
+            // jsConsole.writeLine("input words:");
+            for (var word in input) {
+                //
+                //jsConsole.writeLine(input[word]);
+                if (input[word].contains("@")) {
+                    words[i] = input[word];
+                    //jsConsole.writeLine(words[i]);
+                    i++;
+                }
+            }
+
+
+            var re = /\w/;
+
+            for (var word in words) {
+                //console.log(words[word]);
+                //	jsConsole.writeLine(words[word]);
+
+                //check before@ 1)must be letters, digits or -,_
+                var checksender = true;
+                for (var i = 0; i < words[word].indexOf("@") ; i++) {
+                    //jsConsole.writeLine(words[word]+" index " + words[word][i])
+                    if (!re.test(words[word][i]) && words[word][i] != '.' && words[word][i] != '-' && words[word][i] != '_') {
+                        checksender = false;
+                        //jsConsole.writeLine("checksender "+words[word][i]+checksender);
+                        break;
+                    }
+
+                    else if ((i == 0) && ((word[i] == '.')) || (i == (words[word].indexOf("@") - 1)) && ((words[word][i] == '.'))) {
+                        checksender = false;
+                        break;
+                    }
+
+                }
+                if (checksender == false) continue;
+                else if ((words[word].indexOf("@") == 0) || ((words[word].indexOf("@") == 1) && (!re.test(words[word][0])))) {
+                    checksender = false;
+                    continue;
+                }
+
+                //check domain
+                var dot = false;
+                for (var i = words[word].indexOf("@") + 1; i < words[word].length; i++) {
+                    //check whether is letter or 
+                    if ((!re.test(words[word][i]) && (words[word][i] != '.') && ((words[word][i] != '-')))) {
+                        checksender = false;
+                        break;
+                    }
+                    else if (((i == words[word].indexOf("@" + 1)) || (i == words[word].length - 1)) && (words[word][i] == '.')) {
+                        checksender = false;
+                        break;
+                    }
+                    else if (words[word][i] == '.') dot = true;
+                }
+                if (checksender === false) continue;
+                else if ((dot == false) || ((dot == true) && (words[word].substr(words[word].lastIndexOf('.')).length < 2)) || (!re.test(words[word][(words[word].indexOf("@") + 1)]))) {
+                    checksender = false;
+
+                }
+                if (checksender === false) continue;
+                for (var i = words[word].lastIndexOf('.') + 1; i < words[word].length; i++) {
+                    if (!isLetter(words[word][i])) {
+                        checksender = false;
+                        //jsConsole.writeLine("check is letter "+words[word]+ " is "+!isLetter(words[word][i]))
+                        break;
+                    }
+                }
+                if (checksender === true) {
+                    //jsConsole.writeLine(words[word]+ "checksender = "+checksender);
+                    var currentWord = words[word] + " ";
+                    emails[words[word]] = currentWord;
+                }
+
+            }
+            for (var email in emails) {
+                jsConsole.writeLine(emails[email]);
+            }
+        }
+
+        var str = "Валидни адреси Syika@kanal.com, sladurana@btv.net, -123--@usa.net, test.test123@en.some-host.12345.com Невалидни email адреси: .ala.@bala.com, test@-host.com, user@.test.ru, user@test.ru., alabala@, user@host, @eu.net,test.test123@en.some-host.12345.123";
+        jsConsole.writeLine("Entered text: ")
+        jsConsole.writeLine(str);
+        jsConsole.writeLine();
+        jsConsole.writeLine("Valid emails:");
+
+
+
+        extractEmails(str);
+
+
+    </script>
+</body>
+</html>

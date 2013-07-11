@@ -1,0 +1,64 @@
+﻿<!-- Write a script that finds the maximal increasing sequence in an array. Example: {3, 2, 3, 4, 2, 2, 4}  {2, 3, 4}.
+
+
+ -->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>The maximal increasing sequence  </title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	
+	<div id="js-console">
+	</div>
+	<script src="scripts/js-console.js">	  
+	</script>
+	<script>
+		//Enter some input text
+
+		
+			var arr = [3, 2, 3, 4, 2, 2, 4];
+			
+            var length = arr.length;
+            var start = 0;
+            var maxStart = 0;
+            var maxSequence = 0;
+            var sequence = 0;
+            jsConsole.write("The maximal increasing sequence in array { ");
+            for (var i = 0; i < length - 1; i++)
+            {
+                if (arr[i] <arr[i + 1])
+                {
+                    sequence++;
+                    if (sequence > maxSequence)
+                    {
+                        maxSequence = sequence;
+                        maxStart = start;
+                    }
+
+                }
+                else
+                {
+                    sequence = 0;
+                    start = i + 1;
+                }
+                (i==(length-1)) ? jsConsole.write(arr[i]) : jsConsole.write((arr[i])+", ");
+
+            }
+            jsConsole.write(" } is: ");
+
+            jsConsole.write("{");
+            for (var i = maxStart; i<=maxStart+maxSequence; i++)
+            {
+                (i==(maxStart+maxSequence)) ? jsConsole.write(arr[i]) : jsConsole.write((arr[i])+", ");
+            }
+            jsConsole.writeLine("}");
+			
+		
+
+
+	</script>
+</body>
+</html>

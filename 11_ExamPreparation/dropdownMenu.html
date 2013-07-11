@@ -1,0 +1,34 @@
+<select id="cats-dropdown">
+	<option value="'+category.id+'">
+		category.name
+	</option>
+</select>
+
+function parseCategoriesHTML(categories){
+	var categoriesDropdown=
+	'<select id="cats-dropdown">';
+	for (var i=0; i<categories.length; i++)
+	{
+		var category=categories[i];
+		categoriesDropdown+=
+			'<option value="'+category.id+'">'+
+			   category.name+
+			'</option>'
+			
+	}
+	categoriesDropdown+='</select>'
+	
+
+}
+Закачане на event на dropdown lista
+
+Как да разберем коя е селектираната категория?
+
+$("#cat-dropdown").on("change",onchangeDropDown);
+
+function onchangeDropDown(e){
+	var catId=$("#cats-dropdown option:selected").val();
+}
+
+
+

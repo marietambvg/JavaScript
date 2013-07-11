@@ -1,0 +1,46 @@
+﻿<!--Write a script that converts a number in the range [0...999] to a text corresponding to its English pronunciation. -->
+
+ <!-- !!!!!input data works only with Firefox!!!!! -->
+<html>
+<head>
+	<title>Name of number</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<input type="text" id="input" value="enter digit" />
+	
+	
+	<div id="js-console"></div>
+	<script src="scripts/js-console.js"></script>
+	<script>
+		var n = parseInt(document.getElementById("input").value);
+		
+		
+		//!!!!!input data works only with Firefox!!!!!
+		jsConsole.writeLine("Enter the digit you want to check in the above text box and press F5");
+		jsConsole.writeLine("=====================================================================");
+		if (isNaN(n)) jsConsole.write("Enter a valid digit!");
+		else 
+		{
+        
+       var digitA = ["zero", "one", "two","three", "four", "five", "six", "seven", "eight", "nine"];
+            var digitB = ["ten","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
+            var digitC = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten","eleven", "twelve","thirteen",
+                              "forteen", "fifteen", "sixteen", "seventeen","eitheen", "nineteen","twenty"];
+            if (n < 10) jsConsole.writeLine("You entered "+ digitA[n]+".");
+            else if (n < 20) jsConsole.writeLine("You entered "+ digitC[n - 1]+".");
+            else if (n < 100)
+            {
+                if (n % 10 == 0) jsConsole.writeLine("You entered "+ digitB[n/10 - 1]+".");
+                else jsConsole.writeLine("You entered "+digitB[parseInt(n / 10) - 1]+" "+digitA[n % 10]+".");
+            }
+            else if (n % 100 == 0) jsConsole.writeLine("You entered "+digitA[parseInt(n / 100)]+" hundred.");
+            else if (n % 100 <20) jsConsole.writeLine("You entered "+digitA[parseInt(n / 100)]+" hundred and "+digitC[(n%100) - 1]+".");
+            else if (n % 10 == 0) jsConsole.writeLine("You entered "+digitA[parseInt(n / 100)] +" hundred and "+ digitB[((n % 100)/10) - 1]+".");
+            else jsConsole.writeLine("You entered "+digitA[parseInt(n / 100)] +" hundred and "+ digitB[(parseInt(n / 10) % 10) - 1]+" "+digitA[n%10]+".");
+            
+        }
+	</script>
+</body>
+
+</html>

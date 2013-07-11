@@ -1,0 +1,28 @@
+f1ddb14f454f96775b3137aabb596d818deceb85{
+	"username" : "pesho",
+	"nickname" : "Pesho Trybata",
+	"authCode" : "f1ddb14f454f96775b3137aabb596d818deceb85"
+}
+password : kifla
+sessionKey 14y9ll7Yl6YJy19STjRn4OIRKlfad4iKmxXqestBwSoRV6SBmg
+
+user Zuzana{
+	"username" : "zuzana",
+	"nickname" : "ZuzkaLight",
+	"authCode" : "ab8fe888ae767bb24f8f873e7a3b67abf65f2363"
+	ab8fe888ae767bb24f8f873e7a3b67abf65f2363
+}
+password : bodyrock
+
+user Shoun{
+	"username" : "ShounT",
+	"nickname" : "insanity",
+	"authCode" : "e36a1ed88cb465561cc48b95889a43b8b908c1a4"
+}
+password : insane
+
+user Joro
+password joro{
+	"sessionKey" : "116fbBBwSlRl7t3Gh722T1w9oRCjSZ4At9wFhyqCr5c6NWLMnj",
+	"nickname" : "Georgi Georgiev"
+}

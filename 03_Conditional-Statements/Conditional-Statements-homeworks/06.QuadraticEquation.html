@@ -1,0 +1,54 @@
+﻿<!--Write a script that enters the coefficients a, b and c of a quadratic equation 		a*x2 + b*x + c = 0
+
+ -->
+ <!-- !!!!!input data works only with Firefox!!!!! -->
+<html>
+<head>
+	<title>Squadratic equation</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<input type="text" id="inputA" value="enter value A" />
+	<input type="text" id="inputB" value="enter value B" />
+	<input type="text" id="inputC" value="enter value C" />
+	
+	<div id="js-console"></div>
+	<script src="scripts/js-console.js"></script>
+	<script>
+		var a = parseInt(document.getElementById("inputA").value);
+		var b = parseInt(document.getElementById("inputB").value);
+		var c = parseInt(document.getElementById("inputC").value);
+		
+		//!!!!!input data works only with Firefox!!!!!
+		jsConsole.writeLine("Enter the numbers you want to check in the above text box and press F5");
+		jsConsole.writeLine("=====================================================================");
+		if (isNaN(a)||isNaN(b)||isNaN(c)) jsConsole.write("Enter valid data!");
+		else 
+		{
+          if (a == 0)
+        {
+            var x = (-c / b);
+            jsConsole.writeLine("This is a linear equation and has one root: x = "+ x);
+        }
+        else
+        {
+            if (b * b < 4 * a * c)
+            {
+                jsConsole.writeLine("The equation has not real roots");
+            }
+            else if (b * b == 4 * a * c) jsConsole.writeLine("The equation has one double root which is x(1) = x(2) = " + ((-b) / (2 * a)));
+            else 
+            {
+                var x1 = ((-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a));
+                var x2 = ((-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a));
+                jsConsole.writeLine("The roots of the equation are x1 = " +x1+" and x2 = "+x2);
+            }
+        }
+    }
+
+
+										 
+	</script>
+</body>
+
+</html>

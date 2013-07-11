@@ -1,0 +1,27 @@
+﻿<!--Write an expression that calculates rectangle’s area by given width and height.
+ -->
+<html>
+<head>
+	<title>Rectangle area</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<input type="text" id="wid" />
+	<input type="text" id="hei" />
+	<div id="js-console"></div>
+	<script src="scripts/js-console.js"></script>
+	<script>
+		var width = parseFloat(document.getElementById("wid").value);
+		var height = parseFloat(document.getElementById("hei").value);
+		
+		jsConsole.writeLine("Enter width and height of rectangle in the above text boxes and press F5.");
+		jsConsole.writeLine("=========================================================================");
+			
+		if ((width>0)&&(height>0))
+		jsConsole.writeLine("The rectangle’s area is - "+(width*height))
+		else jsConsole.writeLine("Enter the valid value!")					 
+								 
+	</script>
+</body>
+
+</html>

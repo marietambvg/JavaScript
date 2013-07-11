@@ -1,0 +1,42 @@
+﻿<!-- Write an expression that checks if given positive integer number n (n ≤ 100) is prime. E.g. 37 is prime.
+  -->
+<html>
+<head>
+	<title>Check prime</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<input type="text" id="input" />
+	
+	<div id="js-console"></div>
+	<script src="scripts/js-console.js"></script>
+	<script>
+		var number = parseInt(document.getElementById("input").value);
+		
+		//!!!!!input data work only with Firefox!!!!!
+		jsConsole.writeLine("Enter the number you want to check in the above text box and press F5");
+		jsConsole.writeLine("=====================================================================");
+		
+		if (isNaN(number)||(number>100)||(number<0)) jsConsole.write("Enter number between 0 and 100!")
+		else
+		{ 
+            var max=parseInt(Math.sqrt(number));
+            var divider;
+            var count = 0;
+            for (divider = 2; divider <=max; divider++)
+            {
+                if (number % divider == 0)
+                {
+                    count = count + 1;
+                   
+                }
+            }
+            if(count == 0 || number == 2 ) jsConsole.writeLine("The number is prime!");
+             else jsConsole.writeLine("The number is not prime!");
+        }
+   
+								 
+	</script>
+</body>
+
+</html>

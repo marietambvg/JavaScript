@@ -1,0 +1,144 @@
+﻿<!--Create a module for working to work with DOM. The module should have the following functionality
+Add element to parent element by given selector
+Remove element from the DOM  by given selector
+Attach event to given selector by given event type and event hander
+Add elements to buffer, which appends them to the DOM when their for some selector count becomes 100
+The buffer contains elements for each selector it gets
+Get elements by CSS selector
+The module should reveal only the methods
+ -->
+<html>
+<head>
+	<title>DOM module</title>
+	</head>
+<body>
+	
+	<div id="js-console"></div>
+	<button id="clickButton">Show the picture</button>
+	<ul id="buffer">This ul element have to be filled with 100 li elements if addBuffer Functionality works correct</ul>
+	
+	<script>
+	var domModule=(function(){
+		//functionality - add elelements to dom by given selector
+		function addElement(element, selector) {
+				var parentElements = document.querySelectorAll(selector);
+		       	for (var i = 0; i < parentElements.length; i++) {
+			       	var elementToBeAppend = document.createElement(element);
+		       		parentElements[i].appendChild(elementToBeAppend);
+		       	}
+	       }
+	   //functionality - add elements (selector defines what type of elements) to other elements (argument (element) of function's arguments)
+       function removeElement(element, selector) {
+			var parentNodes=document.querySelectorAll(element);
+			var hasAdditionalSelector=false;
+			if (selector.contains(":")){
+				var selectorData = selector.split(":");
+				var basicSelector = selectorData[0];
+				var specialSelector=selectorData[1];
+			} else basicSelector=selector;
+			for (var i = 0; i < parentNodes.length; i++) {
+				var elementsToBeRemoved = parentNodes[i].querySelectorAll(basicSelector);
+				if  (specialSelector && specialSelector=="last"){
+					parentNodes[i].removeChild(elementsToBeRemoved[(elementsToBeRemoved.length)-1]);
+					} else {
+						for (var j = 0; j < elementsToBeRemoved.length; j++) {
+							parentNodes[i].removeChild(elementsToBeRemoved[j]);
+							if (specialSelector && specialSelector=="first" && j==0) break;
+						}
+				}
+			}
+	   }
+
+	   //functionality - add event to given element (selector) and given evenHandler
+	   function addHandler(selector, eventType, eventHandler){
+	   		var element = document.querySelector(selector);
+	   		var prop = "on" + eventType;
+	   		element[prop] = eventHandler;
+
+	   	}
+	   	
+		//functionality - append elelments to buffer by given selector and when the count of some selector becomes 100 append to DOM
+	   	var buffer={};
+	   	var dfrag={};
+	   	function appendToBuffer(selector, elements){
+	   		var selectedParent=document.querySelector(selector);
+	   		if (!buffer[selector]){
+	   			buffer[selector]=0;
+	   			//console.log(buffer[selector]);
+	   			dfrag[selector]=document.createDocumentFragment();
+	   		}		
+   			for (var i = 0; i < elements.length; i++) {
+   				var currentElement=document.createElement(elements[i]);
+	   			dfrag[selector].appendChild(currentElement);
+	   			buffer[selector]++;
+	   			console.log(buffer[selector]);
+	   			if (buffer[selector]==100) {
+	   				selectedParent.appendChild(dfrag[selector]);
+	   				console.log("You just append 100 elements and empty the buffer")
+	   				buffer[selector]=0;
+	   			};
+	   		}
+	   	};
+	   		
+	   
+	return {
+		appendChild:addElement,
+		removeChild:removeElement,
+		addHandler:addHandler,
+		appendToBuffer:appendToBuffer
+	};
+
+	}());
+	
+	//Test appendChild Functionality
+	//Here we append 3 ul to div with id "js-console"	
+	domModule.appendChild("ul","#js-console");
+	domModule.appendChild("ul","#js-console");
+	domModule.appendChild("ul","#js-console");
+
+
+	//Here we append li elements to every ul element - actually we do it three times
+	domModule.appendChild("li","ul");
+	domModule.appendChild("li","ul");
+	domModule.appendChild("li","ul");
+
+	//Test removeChild Functionality
+	//here we remove last li element of every ul elements so there remain three ul list with two li items in every of it 
+	domModule.removeChild("ul","li:last"); 
+
+	//Next line remove every ul elements in div elements (must uncomment it)
+	//domModule.removeChild("div","ul");
+
+	//this is sample function which we will assign to button - when it is clicked
+	var handler = function onButtonClick(){
+					var element=document.querySelector("button");
+					var status=element.innerHTML;
+					if (status=="Show the picture"){
+						element.innerHTML="Remove picture";
+						var image = document.createElement("img");
+						image.src="images/croc.gif";
+						image.style.position="absolute";
+						image.style.top="10px";
+						image.style.left="100px";
+						document.body.appendChild(image);
+						
+					} else {
+						element.innerHTML="Show the picture";
+						var childToRemove=document.querySelector("img");
+						document.body.removeChild(childToRemove);
+					}
+				};
+	//test addHandler functionality
+	domModule.addHandler("button","click",handler); 
+
+	//test addBuffer functionality
+	var elements=[];
+	for (var i = 0; i < 123; i++) {
+		elements.push("li");
+	};
+	domModule.appendToBuffer("#buffer", elements);
+
+</script>
+</body>
+
+</html>

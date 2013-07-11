@@ -1,0 +1,49 @@
+﻿<!-- Write a function that replaces non breaking white-spaces in a text with &nbsp; -->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Strings - White space escape</title>
+	 <link href="styles/js-console.css" rel="stylesheet" />
+	
+</head>
+<body>
+	<label for="tb-text">Enter some text: </label>
+	<input type="text" id="tb-text" />
+	<button id="btn-check-prime" onclick="onBtnClick()">Check result</button>
+	<div id="js-console">
+	 <div id="js-console"></div>
+    <script src="scripts/js-console.js"></script>
+	
+	<script type="text/javascript">
+	function onBtnClick() {
+
+			var text = jsConsole.read("#tb-text");
+		
+
+	String.prototype.whiteEscape = function () {
+			return this.replace(/ /g,"&nbsp;");
+		}	
+		
+	   jsConsole.writeLine("Text replaced with '&nbsp'");
+	   jsConsole.writeLine(text.whiteEscape());
+	   
+	   var replaceWhiteSpace=function(text){
+	   	var cleanedText="";
+	   	for (var i = 0; i < text.length; i++) {
+	   
+	   	if (text[i]!==" ")
+	   	{
+	   		cleanedText+=text[i];
+	   	}
+	   }
+	   return cleanedText;
+	}
+	var newText=replaceWhiteSpace(text);
+	jsConsole.writeLine(newText);
+}
+
+	</script>
+
+</body>
+</html>

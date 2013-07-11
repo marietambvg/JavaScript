@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestItemCreator", "TestItemCreator\TestItemCreator.csproj", "{808D26B6-781A-4EF8-992C-A367AA9CECBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizControl", "QuizControl\QuizControl.csproj", "{28CF2C09-62CE-44B5-BFC1-AD524065E758}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizSystemGeneral", "QuizSystemGeneral\QuizSystemGeneral.csproj", "{5E9A1D35-99C5-4765-8E8D-4113DD581524}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{808D26B6-781A-4EF8-992C-A367AA9CECBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{808D26B6-781A-4EF8-992C-A367AA9CECBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{808D26B6-781A-4EF8-992C-A367AA9CECBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{808D26B6-781A-4EF8-992C-A367AA9CECBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28CF2C09-62CE-44B5-BFC1-AD524065E758}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28CF2C09-62CE-44B5-BFC1-AD524065E758}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28CF2C09-62CE-44B5-BFC1-AD524065E758}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28CF2C09-62CE-44B5-BFC1-AD524065E758}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E9A1D35-99C5-4765-8E8D-4113DD581524}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E9A1D35-99C5-4765-8E8D-4113DD581524}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E9A1D35-99C5-4765-8E8D-4113DD581524}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E9A1D35-99C5-4765-8E8D-4113DD581524}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

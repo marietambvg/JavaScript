@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    
+   
+    <script type="text/javascript">
+        function Solve(args) {
+           var result="";
+           //read input data
+           var base=args[0].split(' ');
+           var N=parseInt(base[0]);
+           var M=parseInt(base[1]);
+           var numberJumps=parseInt(base[2]);
+           var countJumps=1;
+           var lineTwo=args[1].split(' ');
+           
+           var srow=parseInt(lineTwo[0]);
+           var scol=parseInt(lineTwo[1]);
+
+           //create matrix
+           var score=new Array(N);
+           var current=1;
+           for (var i = 0; i < N; i++) {
+               score[i]=[];
+               
+
+               for (var j = 0; j <  M; j++) {
+                    score[i].push(current);
+                    current++;
+                    //result=result+" "+current;
+               };
+               //result+="\r\n"
+
+           };
+
+           //enter jumps pattern
+           
+           var jumps={};
+                for (var i = 0; i < numberJumps; i++) {
+                jumps[i]=new Array(2);
+                var jumpsLine =(args[i+2]).split(" ");
+                jumps[i][0]=parseInt(jumpsLine[0]);
+                jumps[i][1]=parseInt(jumpsLine[1]);
+
+
+                //sum=sum=jumps[i][1];
+           };
+
+           var nrow=srow;
+           var ncol=scol;
+           var points=score[srow][scol];
+           var escape="escaped ";
+           
+           while( (ncol<M)&&(nrow<N))
+            {
+                
+                for (var i=0; i<numberJumps;i++)
+                {
+                    nrow=nrow+jumps[i][0];
+                    //return nrow;
+                    ncol=ncol+jumps[i][1];
+
+                    if((nrow===N)||(ncol===M))
+                    {
+                        result="escaped "+points;
+                        return result;
+                    }
+                    else if (score[nrow][ncol]===0)
+                        {
+                           result="cougth "+countJumps;
+                           return result;
+                        }
+                    else
+                        {
+                         points+=score[nrow][ncol];
+                         score[nrow][ncol]=0;
+                         countJumps++;
+                        }
+
+
+                }
+
+            }
+
+       
+        
+        }
+   
+        function InputData() {
+            var args = ["6 7 3","0 0", "2 2", "-2 2", "3 -1"];
+            //args.push(70110209207109375);
+           
+            console.log(Solve(args));
+
+        }
+    </script>
+</head>
+<body onload="InputData()">
+
+</body>
+</html>

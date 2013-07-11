@@ -1,0 +1,53 @@
+﻿<!-- Write a script to sort an array. Use the "selection sort" algorithm:  -->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Selection Sort Algorithm  </title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	
+	<div id="js-console">
+	</div>
+	<script src="scripts/js-console.js">	  
+	</script>
+	<script>
+		//Enter some input text
+
+		
+			var arr = [1000, 14, 25, -25, -5, -20, -66, -9, -1, 2000, -5000];
+			// var sortedArray=new Array(arr.length)
+			var min;
+            var temp;
+            jsConsole.write("The array to be sorted: { ");
+            arr.forEach(function(item){jsConsole.write(item+" ")});
+
+            
+            for (var j = 0; j < arr.length - 1; j++)
+            {
+                temp = j;
+                min = arr[j];
+                for (var i = j; i < arr.length - 1; i++)
+                {
+
+                    if (min> arr[i + 1])
+                    {
+                        min = arr[i + 1];
+                        temp = i + 1;
+
+                    }
+                }
+                arr[temp] = arr[j]; 
+                arr[j] = min;
+            }
+            jsConsole.writeLine(" }");
+
+            jsConsole.write("Sorted array {");
+            arr.forEach(function(item){jsConsole.write(item+" ")});
+            jsConsole.writeLine("}");
+			
+		
+	</script>
+</body>
+</html>

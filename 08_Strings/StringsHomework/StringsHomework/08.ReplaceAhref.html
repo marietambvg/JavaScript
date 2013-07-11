@@ -1,0 +1,71 @@
+﻿<!-- Write a JavaScript function that replaces in a HTML document given as string all the tags <a href="…">…</a> with corresponding tags [URL=…]…/URL]. Sample HTML fragment: <p>Please visit <a href="http://academy.telerik. com">our site</a> to choose a training course. Also visit <a href="www.devbg.org">our forum</a> to discuss the courses.</p>
+<p>Please visit [URL=http://academy.telerik. com]our site[/URL] to choose a training course. Also visit [URL=www.devbg.org]our forum[/URL] to discuss the courses.</p>
+ -->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Replace a href tags</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+
+</head>
+<body>
+    <label for="tb-text">Enter data: </label>
+    <textarea style="width: 500px; height: 50px" id="tb-text"></textarea>
+    <button id="btn-remove-HTML" onclick="onBtnClick()">Check result</button>
+
+    <div id="js-console"></div>
+    <script src="scripts/js-console.js"></script>
+
+    <script>
+
+
+
+        function replaceAHref(text) {
+            var replaced = "";
+            var inHref = false;
+            var start = 0;
+            while (start < text.length - 1) {
+                var end = text.indexOf("<a href", start);
+                if (end >= 0) {
+                    replaced = replaced + text.substring(start, end - 1);
+                    replaced = replaced + "[URL=";
+                    inHref = true;
+                    start = end + 8;
+                    end = text.indexOf("\">", start);
+                    replaced += text.substring(start + 1, end);
+                    replaced += "]";
+                    start = end + 2;
+                    end = text.indexOf("</a>", start);
+                    replaced += text.substring(start, end);
+                    replaced += "[/URL]";
+                    start = end + 4;
+                    end = start;
+                }
+                else {
+                    replaced += text.substring(start, text.length);
+                    break;
+                }
+            }
+            return replaced;
+
+        }
+        String.prototype.htmlEscape = function () {
+            return this.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        function onBtnClick() {
+
+            var text = jsConsole.read("#tb-text");
+            var newText = replaceAHref(text);
+
+            jsConsole.writeLine(text.htmlEscape());
+            jsConsole.writeLine(newText.htmlEscape());
+
+
+        }
+
+    </script>
+
+</body>
+</html>

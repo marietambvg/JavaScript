@@ -1,0 +1,23 @@
+﻿<!-- Write an expression that checks if given integer is odd or even. -->
+
+<html>
+<head>
+	<title>Check if the number is even</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<input type="text" id="input" value="0"/>
+	<div id="js-console"></div>
+	<script src="scripts/js-console.js"></script>
+	<script>
+		var number = parseInt(document.getElementById("input").value);
+		
+		jsConsole.writeLine("Enter some number in the text box above and press F5.");
+			
+		jsConsole.write("The entered number "+number+" is even? - "+(number%2==0));
+								 
+								 
+	</script>
+</body>
+
+</html>

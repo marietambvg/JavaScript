@@ -1,0 +1,61 @@
+﻿<!-- Write a function that extracts the content of a html page given as text. The function should return anything that is in a tag, without the tags:-->
+<!-- <html><head><title>Sample site</title></head><body><div>text<div>more text</div>and more...</div>in body</body></html>
+ -->
+ <!-- result -->
+<!--  Sample sitetextmore textand more...in body -->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Remove HTML tags</title>
+	 <link href="styles/js-console.css" rel="stylesheet" />
+	
+</head>
+<body>
+	<label for="tb-text">Enter some text: </label>
+	<textarea style="width:500px; height:50px" id="tb-text"></textarea>
+	<button id="btn-remove-HTML" onclick="onBtnClick()">Check result</button>
+	
+	 <div id="js-console"></div>
+    <script src="scripts/js-console.js"></script>
+	
+	<script>
+	
+		
+	   	function removeHtmlTags(text){
+	   	var cleanedText="";
+	   	var inTag=false;
+
+	   	for (var i = 0; i < text.length; i++) {
+	   
+	   	if (text[i]==="<")
+	   	{
+	   		inTag=true;
+	   	}
+	   	if ((inTag)&&(text[i]===">"))
+	   	{
+	   		inTag=false;
+	   	}
+
+	   	else if (!inTag)
+	   	{
+	   		cleanedText+=text[i];
+	   	}
+	   }
+	   return cleanedText;
+	}
+	function onBtnClick() {
+
+	var text = jsConsole.read("#tb-text");
+	var newText=removeHtmlTags(text);
+
+    jsConsole.writeLine(newText);
+    
+	
+	
+}
+
+	</script>
+
+</body>
+</html>

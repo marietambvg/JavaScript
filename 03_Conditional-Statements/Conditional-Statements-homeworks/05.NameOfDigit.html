@@ -1,0 +1,49 @@
+﻿<!--Write script that asks for a digit and depending on the input shows the name of that digit (in English) using a switch statement.
+ -->
+
+ <!-- !!!!!input data works only with Firefox!!!!! -->
+<html>
+<head>
+	<title>Name of digit</title>
+	<link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+	<input type="text" id="inputA" value="enter digit" />
+	
+	
+	<div id="js-console"></div>
+	<script src="scripts/js-console.js"></script>
+	<script>
+		var a = parseFloat(document.getElementById("inputA").value);
+		
+		
+		//!!!!!input data works only with Firefox!!!!!
+		jsConsole.writeLine("Enter the digit you want to check in the above text box and press F5");
+		jsConsole.writeLine("=====================================================================");
+		if (isNaN(a)||a<0||a>9) jsConsole.write("Enter a valid digit!");
+		else 
+		{
+        
+        switch(a)
+        {
+            case 0: jsConsole.writeLine("You entered zero."); break; 
+            case 1: jsConsole.writeLine("You entered one."); break;
+            case 2: jsConsole.writeLine("You entered two."); break;
+            case 3: jsConsole.writeLine("You entered three."); break;
+            case 4: jsConsole.writeLine("You entered four."); break;
+            case 5: jsConsole.writeLine("You entered five."); break;
+            case 6: jsConsole.writeLine("You entered six."); break;
+            case 7: jsConsole.writeLine("You entered seven."); break;
+            case 8: jsConsole.writeLine("You entered eight."); break;
+            case 9: jsConsole.writeLine("You entered nine."); break;
+            default: jsConsole.writeLine("Invalid digit!");break;
+
+            }
+        }
+
+
+										 
+	</script>
+</body>
+
+</html>

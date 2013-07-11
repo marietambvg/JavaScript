@@ -1,0 +1,58 @@
+<!-- Create a text area and two inputs with type="color"
+Make the font color of the text area as the value of the first color input
+Make the background color of the text area as the value of the second input
+ -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Text area</title>
+	<style type="text/css">
+	textarea{
+		width: 500px;
+		height:150px;
+		text-align: left;
+		font-weight: bold;
+	}
+	</style>
+	
+</head>
+<body>
+<p>Enter background and font color you want text area to have in the next fields</p>
+<p>Example: <strong>white</strong> or <strong>black</strong> or <strong>blue</strong></p>
+<p>You can enter it and in HEX format like that: <strong>#DB7093</strong> or rgb format like that:<strong>rgb(255,0,0)</strong> </p>
+
+<label for="background">Background color</label>
+<input type="text" id="background" />
+</br></br>
+<label for="font-color">Font color</label>
+<input type="text" id="fontcolor" />
+</br>
+</br>
+<button onclick="onCreateColorsButtonClick()">Set colors of fonts and background </button>
+</br>
+</br>
+<textarea>Create a text area and two inputs with type="color"
+
+Make the font color of the text area as the value of the first color input 
+
+Make the background color of the text area as the value of the second input
+</textarea>
+
+<script type="text/javascript">
+		
+
+		function onCreateColorsButtonClick(){
+			
+			var text=document.getElementsByTagName("textarea")[0];
+			//console.log(count);
+			var background=document.getElementById('background').value;
+			var font=document.getElementById('fontcolor').value;
+			text.style.backgroundColor=background;
+			text.style.color=font;
+
+		}
+	
+
+	</script>	
+</body>
+</html>
